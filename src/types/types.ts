@@ -2,6 +2,7 @@ import { Mode, Speed } from "./enums"
 
 export type Settings = {
     shellNumber: number
+    shuffleNumber: number
     speed: Speed
     chances: number
     mode: Mode

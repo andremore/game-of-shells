@@ -1,8 +1,8 @@
 export enum Speed {
-    SLOW = 'slow',
-    NORMAL = 'normal',
-    FAST = 'fast',
-    HARDCORE = 'hardcore'
+    SLOW = 500,
+    NORMAL = 250,
+    FAST = 150,
+    HARDCORE = 50
 }
 
 export enum Mode {

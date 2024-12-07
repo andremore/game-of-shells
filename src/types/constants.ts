@@ -3,6 +3,7 @@ import { Settings } from "./types";
 
 export const defaultSettings: Settings = {
     shellNumber: 3,
+    shuffleNumber: 3,
     speed: Speed.NORMAL,
     chances: 1,
     mode: Mode.DEFAULT
