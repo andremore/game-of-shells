@@ -9,7 +9,8 @@ export type Settings = {
 
 export type Shell = {
     element: HTMLDivElement
-    hasBall: boolean
+    listener: (index: number) => void
+    handlerFn: () => void
 }
 
 export type GameState = {
