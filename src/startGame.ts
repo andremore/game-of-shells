@@ -107,7 +107,7 @@ function showBallInShellTemporarily(): Promise<void> {
             setTimeout(() => {
                 ball.remove();
                 resolve();
-            }, 1500);
+            }, settings.displayBallTTl);
         }, 250);
     });
 };

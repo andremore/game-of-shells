@@ -1,7 +1,7 @@
-import { defaultSettings } from "./constants";
+import { normalDifficulty } from "./constants";
 import { GameState, Settings } from "./types/types";
 
-export const settings: Settings = defaultSettings;
+export const settings: Settings = normalDifficulty;
 
 export const gameState: GameState = {
     shells: [],
