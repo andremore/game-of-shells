@@ -94,3 +94,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.shell-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.shell {
+  width: 5em;
+  height: 5em;
+  background-color: #f9f9f9;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.shell:hover {
+  background-color: #747bff;
+  transition: background-color 250ms;
+}

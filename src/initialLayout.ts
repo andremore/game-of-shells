@@ -1,5 +1,4 @@
 import { startGame } from "./startGame";
-import { settings } from "./state";
 
 export function initialLayout(root: HTMLDivElement) {
   const container = document.createElement('div');
@@ -11,12 +10,14 @@ export function initialLayout(root: HTMLDivElement) {
 
   const btnStartGame = document.createElement('button');
   btnStartGame.type = 'button';
+  btnStartGame.id = 'startGame';
   btnStartGame.textContent = 'Start Game';
-  btnStartGame.addEventListener('click', () => startGame(settings));
+  btnStartGame.addEventListener('click', () => startGame(container));
   container.appendChild(btnStartGame);
 
   const btnSettings = document.createElement('button');
   btnSettings.type = 'button';
+  btnStartGame.id = 'settings';
   btnSettings.textContent = '⚙';
   root.appendChild(btnSettings);
 }
