@@ -1,7 +1,7 @@
 import { Mode, Speed } from "./enums"
 
 export type Settings = {
-    shellNumber: number | null
+    shellNumber: number
     speed: Speed
     chances: number
     mode: Mode
@@ -10,7 +10,6 @@ export type Settings = {
 export type Shell = {
     element: HTMLDivElement
     hasBall: boolean
-    selected: boolean
 }
 
 export type GameState = {

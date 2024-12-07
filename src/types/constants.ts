@@ -7,3 +7,5 @@ export const defaultSettings: Settings = {
     chances: 1,
     mode: Mode.DEFAULT
 }
+
+export const gameIrrelevantElementIds = ['startGame', 'settings']
