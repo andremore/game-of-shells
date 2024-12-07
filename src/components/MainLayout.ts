@@ -1,6 +1,7 @@
 import { startGame } from "../startGame";
-import { root } from "../constants";
-import { ContainerIds } from "../types/enums";
+import { difficultyMap, root } from "../constants";
+import { ContainerIds, Difficulty } from "../types/enums";
+import { setSettings } from "../state";
 
 export function MainLayout() {
   const title = document.createElement('h1');
@@ -16,6 +17,22 @@ export function MainLayout() {
   btnStartGame.textContent = 'Start Game';
   btnStartGame.addEventListener('click', startGame);
 
+  const difficultyContainer = document.createElement('div');
+  difficultyContainer.id = ContainerIds.DIFFICULTY;
+
+  Object.keys(difficultyMap).forEach(difficulty => {
+    const btnDifficulty = document.createElement('button');
+    btnDifficulty.type = 'button';
+    btnDifficulty.classList.add('difficulty');
+    btnDifficulty.textContent = difficulty;
+
+    btnDifficulty.addEventListener('click', () => {
+      setSettings(difficulty as Difficulty)
+    });
+
+    difficultyContainer.appendChild(btnDifficulty);
+  })
+
   const btnSettings = document.createElement('button');
   btnSettings.type = 'button';
   btnSettings.textContent = '⚙';
@@ -23,5 +40,6 @@ export function MainLayout() {
   root?.appendChild(title);
   root?.appendChild(container);
   container.appendChild(btnStartGame);
+  root?.appendChild(difficultyContainer);
   root?.appendChild(btnSettings);
 }

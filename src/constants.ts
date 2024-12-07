@@ -1,4 +1,4 @@
-import { Mode, Speed } from "./types/enums";
+import { ContainerIds, Difficulty, Mode, Speed } from "./types/enums";
 import { Settings } from "./types/types";
 
 export const easyDifficulty: Settings = {
@@ -34,10 +34,17 @@ export const hardcoreDifficulty: Settings = {
     speed: Speed.HARDCORE,
     chances: 1,
     mode: Mode.DEFAULT,
-    displayBallTTl: 350
+    displayBallTTl: 250
+}
+
+export const difficultyMap = {
+    [Difficulty.EASY]: easyDifficulty,
+    [Difficulty.NORMAL]: normalDifficulty,
+    [Difficulty.HARD]: hardDifficulty,
+    [Difficulty.HARDCORE]: hardcoreDifficulty
 }
 
 export const root = document.querySelector<HTMLDivElement>('#app');
 
-export const gameIrrelevantElementIds = ['start-game', 'settings'];
+export const gameIrrelevantElementIds = ['start-game', 'settings', ContainerIds.DIFFICULTY];
 export const gameIrrelevantClassNames = ['.post-game'];
