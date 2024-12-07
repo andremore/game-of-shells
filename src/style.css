@@ -134,3 +134,7 @@ button:focus-visible {
 #chances-container {
   text-align: right;
 }
+
+.difficulty {
+  text-transform: capitalize;
+}
