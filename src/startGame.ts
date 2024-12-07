@@ -1,33 +1,41 @@
+import { PostGame } from "./components/PostGame";
 import { gameState, resetGameState, setBallIndex, setShellsClickHandlers, settings } from "./state";
-import { gameIrrelevantElementIds } from "./types/constants";
+import { gameIrrelevantClassNames, gameIrrelevantElementIds } from "./types/constants";
+import { ContainerIds } from "./types/enums";
 
 function destroyGameIrrelevantElements() {
     let i = 0;
     for (; i < gameIrrelevantElementIds.length; i++) {
-        const irrelevantElement = document.getElementById(gameIrrelevantElementIds[i]);
-        irrelevantElement?.remove();
+        document.getElementById(gameIrrelevantElementIds[i])?.remove();
+    }
+
+    let j = 0;
+    for (; j < gameIrrelevantClassNames.length; j++) {
+        document.querySelectorAll(gameIrrelevantClassNames[j]).forEach(el => el.remove());
     }
 }
 
 const shellClickHandler = (index: number) => {
-    if (index === gameState.ballIndex) {
-        resetGameState();
-        console.log('you won');
-        return;
-    }
-
-    console.log('you lost');
+    PostGame(index === gameState.ballIndex);
+    document.getElementById(ContainerIds.SHELL)?.remove();
     resetGameState();
 }
 
-function createGameShells(container: HTMLDivElement) {
-    const shellContainer = document.createElement('div');
-    shellContainer.className = 'shell-container';
+function createGameShells() {
+    const container = document.getElementById(ContainerIds.GAME);
+
+    let shellContainer = document.getElementById(ContainerIds.SHELL);
+
+    if (!shellContainer) {
+        shellContainer = document.createElement('div');
+    }
+
+    shellContainer.id = ContainerIds.SHELL;
 
     for (let i = 0; i < settings.shellNumber; i++) {
         const shell = document.createElement('div');
-
         shell.classList.add('shell');
+
         shellContainer.appendChild(shell);
         gameState.shells.push({
             element: shell,
@@ -36,7 +44,7 @@ function createGameShells(container: HTMLDivElement) {
         });
     }
 
-    container.appendChild(shellContainer);
+    container?.appendChild(shellContainer);
 }
 
 function showBallInShellTemporarily(): Promise<void> {
@@ -65,9 +73,9 @@ const shuffleShells = () => {
     console.log('shuffle');
 }
 
-export function startGame(container: HTMLDivElement) {
+export function startGame() {
     destroyGameIrrelevantElements();
-    createGameShells(container);
+    createGameShells();
     setBallIndex();
     showBallInShellTemporarily().then(() => {
         shuffleShells();
