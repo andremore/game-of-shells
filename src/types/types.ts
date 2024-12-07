@@ -6,6 +6,7 @@ export type Settings = {
     speed: Speed
     chances: number
     mode: Mode
+    displayBallTTl: number
 }
 
 export type Shell = {

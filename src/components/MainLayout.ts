@@ -1,5 +1,5 @@
 import { startGame } from "../startGame";
-import { root } from "../types/constants";
+import { root } from "../constants";
 import { ContainerIds } from "../types/enums";
 
 export function MainLayout() {

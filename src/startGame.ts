@@ -1,7 +1,7 @@
 import { Chances } from "./components/Chances";
 import { PostGame } from "./components/PostGame";
 import { gameState, resetGameState, setBallIndex, setShellsClickHandlers, settings } from "./state";
-import { gameIrrelevantClassNames, gameIrrelevantElementIds } from "./types/constants";
+import { gameIrrelevantClassNames, gameIrrelevantElementIds } from "./constants";
 import { ContainerIds } from "./types/enums";
 
 function destroyGameIrrelevantElements() {
@@ -107,7 +107,7 @@ function showBallInShellTemporarily(): Promise<void> {
             setTimeout(() => {
                 ball.remove();
                 resolve();
-            }, 1500);
+            }, settings.displayBallTTl);
         }, 250);
     });
 };
