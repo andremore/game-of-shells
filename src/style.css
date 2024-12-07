@@ -101,6 +101,9 @@ button:focus-visible {
 }
 
 .shell {
+  display: grid;
+  justify-content: center;
+  align-items: center;
   width: 5em;
   height: 5em;
   background-color: #f9f9f9;
@@ -111,4 +114,11 @@ button:focus-visible {
 .shell:hover {
   background-color: #747bff;
   transition: background-color 250ms;
+}
+
+#ball {
+  background-color: red;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
 }
