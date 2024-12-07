@@ -130,3 +130,7 @@ button:focus-visible {
   height: 2.5em;
   border-radius: 50%;
 }
+
+#chances-container {
+  text-align: right;
+}

@@ -11,5 +11,5 @@ export const defaultSettings: Settings = {
 
 export const root = document.querySelector<HTMLDivElement>('#app');
 
-export const gameIrrelevantElementIds = ['startGame', 'settings'];
+export const gameIrrelevantElementIds = ['start-game', 'settings'];
 export const gameIrrelevantClassNames = ['.post-game'];

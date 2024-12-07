@@ -10,11 +10,12 @@ export type Settings = {
 
 export type Shell = {
     element: HTMLDivElement
-    listener: (index: number) => void
+    listener: (index: number, chancesSpan: HTMLSpanElement | null) => void
     handlerFn: () => void
 }
 
 export type GameState = {
     shells: Shell[]
     ballIndex: number | null
+    chances: number
 }
