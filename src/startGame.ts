@@ -21,6 +21,16 @@ const shellClickHandler = (index: number) => {
     resetGameState();
 }
 
+// TODO: Remove after completion, this is for debugging purposes
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 function createGameShells() {
     const container = document.getElementById(ContainerIds.GAME);
 
@@ -35,6 +45,8 @@ function createGameShells() {
     for (let i = 0; i < settings.shellNumber; i++) {
         const shell = document.createElement('div');
         shell.classList.add('shell');
+        // TODO: Remove after completion, this is for debugging purposes
+        shell.style.backgroundColor = getRandomColor();
 
         shellContainer.appendChild(shell);
         gameState.shells.push({
@@ -70,7 +82,33 @@ function showBallInShellTemporarily(): Promise<void> {
 };
 
 const shuffleShells = () => {
-    console.log('shuffle');
+    let shellContainer = document.getElementById(ContainerIds.SHELL);
+
+    if (shellContainer == null) {
+        return;
+    }
+
+    let childrenArray = Array.from(shellContainer.children) as HTMLDivElement[];
+
+    const performShuffle = (i: number) => {
+        for (let j = childrenArray.length - 1; j > 0; j--) {
+            const randomIndex = Math.floor(Math.random() * (j + 1));
+
+            let currentChild = childrenArray[j];
+            let randomChild = childrenArray[randomIndex];
+
+            childrenArray[j] = randomChild;
+            childrenArray[randomIndex] = currentChild;
+        }
+
+        childrenArray.forEach(child => shellContainer.appendChild(child));
+
+        if (i < settings.shuffleNumber - 1) {
+            setTimeout(() => performShuffle(i + 1), settings.speed);
+        }
+    }
+
+    performShuffle(0);
 }
 
 export function startGame() {
