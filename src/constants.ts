@@ -1,4 +1,4 @@
-import { ContainerIds, DifficultySettings, Mode, Speed } from "./types/enums";
+import { ContainerIds, Difficulty, Mode, Speed } from "./types/enums";
 import { SettingsStore } from "./types/types";
 
 export const easySettings: SettingsStore = {
@@ -38,10 +38,10 @@ export const hardcoreSettings: SettingsStore = {
 }
 
 export const settingsMap = {
-    [DifficultySettings.EASY]: easySettings,
-    [DifficultySettings.NORMAL]: normalSettings,
-    [DifficultySettings.HARD]: hardSettings,
-    [DifficultySettings.HARDCORE]: hardcoreSettings
+    [Difficulty.EASY]: easySettings,
+    [Difficulty.NORMAL]: normalSettings,
+    [Difficulty.HARD]: hardSettings,
+    [Difficulty.HARDCORE]: hardcoreSettings
 }
 
 export const root = document.querySelector<HTMLDivElement>('#app');
