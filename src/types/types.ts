@@ -1,6 +1,6 @@
 import { Mode, Speed } from "./enums"
 
-export type Settings = {
+export type SettingsStore = {
     shellNumber: number
     shuffleNumber: number
     speed: Speed
@@ -15,7 +15,7 @@ export type Shell = {
     handlerFn: () => void
 }
 
-export type GameState = {
+export type GameStore = {
     shells: Shell[]
     ballIndex: number | null
     chances: number
