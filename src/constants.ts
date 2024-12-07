@@ -1,7 +1,7 @@
 import { ContainerIds, DifficultySettings, Mode, Speed } from "./types/enums";
-import { Settings } from "./types/types";
+import { SettingsStore } from "./types/types";
 
-export const easySettings: Settings = {
+export const easySettings: SettingsStore = {
     shellNumber: 3,
     shuffleNumber: 2,
     speed: Speed.SLOW,
@@ -10,7 +10,7 @@ export const easySettings: Settings = {
     displayBallTTl: 1500
 }
 
-export const normalSettings: Settings = {
+export const normalSettings: SettingsStore = {
     shellNumber: 3,
     shuffleNumber: 3,
     speed: Speed.NORMAL,
@@ -19,7 +19,7 @@ export const normalSettings: Settings = {
     displayBallTTl: 1000
 }
 
-export const hardSettings: Settings = {
+export const hardSettings: SettingsStore = {
     shellNumber: 4,
     shuffleNumber: 3,
     speed: Speed.FAST,
@@ -28,7 +28,7 @@ export const hardSettings: Settings = {
     displayBallTTl: 750
 }
 
-export const hardcoreSettings: Settings = {
+export const hardcoreSettings: SettingsStore = {
     shellNumber: 6,
     shuffleNumber: 5,
     speed: Speed.HARDCORE,

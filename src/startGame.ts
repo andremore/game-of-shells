@@ -1,8 +1,9 @@
 import { Chances } from "./components/Chances";
 import { PostGame } from "./components/PostGame";
-import { gameState, resetGameState, setBallIndex, setShellsClickHandlers, settings } from "./state";
 import { gameIrrelevantClassNames, gameIrrelevantElementIds } from "./constants";
 import { ContainerIds } from "./types/enums";
+import { settingsStore } from "./stores/settingsStore";
+import { gameStore, resetGameState, setBallIndex, setShellsClickHandlers } from "./stores/gameStore";
 
 function destroyGameIrrelevantElements() {
     let i = 0;
@@ -24,25 +25,25 @@ function resetGame(userWon: boolean) {
 }
 
 const shellClickHandler = (index: number, chancesSpan: HTMLSpanElement | null) => {
-    const isCorrectShell = index === gameState.ballIndex;
+    const isCorrectShell = index === gameStore.ballIndex;
 
     if (isCorrectShell) {
         resetGame(isCorrectShell);
         return;
     }
 
-    gameState.chances--;
+    gameStore.chances--;
 
     if (chancesSpan != null) {
-        chancesSpan.textContent = `${gameState.chances} chances left`;
+        chancesSpan.textContent = `${gameStore.chances} chances left`;
     }
 
-    if (gameState.chances <= 0) {
+    if (gameStore.chances <= 0) {
         resetGame(isCorrectShell);
         return;
     }
 
-    const { element, handlerFn } = gameState.shells[index];
+    const { element, handlerFn } = gameStore.shells[index];
 
     element.style.backgroundColor = 'red';
     element.removeEventListener('click', handlerFn);
@@ -73,14 +74,14 @@ function createGameShells(chancesSpan: HTMLSpanElement | null) {
 
     shellContainer.id = ContainerIds.SHELL;
 
-    for (let i = 0; i < settings.shellNumber; i++) {
+    for (let i = 0; i < settingsStore.shellNumber; i++) {
         const shell = document.createElement('div');
         shell.classList.add('shell');
         // TODO: Remove after completion, this is for debugging purposes
         shell.style.backgroundColor = getRandomColor();
 
         shellContainer.appendChild(shell);
-        gameState.shells.push({
+        gameStore.shells.push({
             element: shell,
             listener: () => shellClickHandler(i, chancesSpan),
             handlerFn: () => null
@@ -91,14 +92,14 @@ function createGameShells(chancesSpan: HTMLSpanElement | null) {
 }
 
 function showBallInShellTemporarily(): Promise<void> {
-    if (gameState.ballIndex == null) {
+    if (gameStore.ballIndex == null) {
         return Promise.resolve();
     }
 
     const ball = document.createElement('div');
     ball.id = 'ball';
 
-    const shellToAddBall = gameState.shells[gameState.ballIndex].element;
+    const shellToAddBall = gameStore.shells[gameStore.ballIndex].element;
 
     return new Promise<void>(resolve => {
         setTimeout(() => {
@@ -107,7 +108,7 @@ function showBallInShellTemporarily(): Promise<void> {
             setTimeout(() => {
                 ball.remove();
                 resolve();
-            }, settings.displayBallTTl);
+            }, settingsStore.displayBallTTl);
         }, 250);
     });
 };
@@ -134,8 +135,8 @@ const shuffleShells = () => {
 
         childrenArray.forEach(child => shellContainer.appendChild(child));
 
-        if (i < settings.shuffleNumber - 1) {
-            setTimeout(() => performShuffle(i + 1), settings.speed);
+        if (i < settingsStore.shuffleNumber - 1) {
+            setTimeout(() => performShuffle(i + 1), settingsStore.speed);
         }
     }
 
@@ -146,7 +147,7 @@ export function startGame() {
     destroyGameIrrelevantElements();
 
     let chancesSpan: HTMLSpanElement | null = null;
-    if (settings.chances > 1) {
+    if (settingsStore.chances > 1) {
         chancesSpan = Chances();
     }
 

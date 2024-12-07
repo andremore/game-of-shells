@@ -1,4 +1,4 @@
-import { gameState } from "../state";
+import { gameStore } from "../stores/gameStore";
 import { ContainerIds } from "../types/enums";
 
 export function Chances() {
@@ -6,7 +6,7 @@ export function Chances() {
     chancesContainer.id = ContainerIds.CHANCES;
 
     const chancesSpan = document.createElement('span');
-    chancesSpan.textContent = `${gameState.chances} chances left`;
+    chancesSpan.textContent = `${gameStore.chances} chances left`;
     chancesContainer.appendChild(chancesSpan);
 
     const title = document.getElementById('title');

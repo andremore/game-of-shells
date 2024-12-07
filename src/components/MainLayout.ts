@@ -1,7 +1,7 @@
 import { startGame } from "../startGame";
 import { settingsMap, root } from "../constants";
 import { ContainerIds, DifficultySettings } from "../types/enums";
-import { setSettings } from "../state";
+import { setSettings } from "../stores/settingsStore";
 
 export function MainLayout() {
   const title = document.createElement('h1');
