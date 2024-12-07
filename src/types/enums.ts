@@ -11,6 +11,8 @@ export enum Mode {
 }
 
 export enum ContainerIds {
+    START_GAME = 'start-game',
     GAME = 'game-container',
-    SHELL = 'shell-container'
+    SHELL = 'shell-container',
+    CHANCES = 'chances-container'
 }

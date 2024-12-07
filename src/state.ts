@@ -6,20 +6,21 @@ export const settings: Settings = defaultSettings;
 export const gameState: GameState = {
     shells: [],
     ballIndex: null,
+    chances: settings.chances
 };
 
 export function setBallIndex() {
     gameState.ballIndex = Math.floor(Math.random() * gameState.shells.length);
 }
 
-export function setShellsClickHandlers() {
+export function setShellsClickHandlers(chancesSpan: HTMLSpanElement | null) {
     if (!gameState.shells.length) {
         return;
     }
 
     for (let i = 0; i < gameState.shells.length; i++) {
         const handlerFn = () => {
-            gameState.shells[i].listener(i);
+            gameState.shells[i].listener(i, chancesSpan);
         };
 
         gameState.shells[i].handlerFn = handlerFn;
@@ -40,4 +41,5 @@ export function resetGameState() {
 
     gameState.shells = [];
     gameState.ballIndex = null;
+    gameState.chances = settings.chances;
 }

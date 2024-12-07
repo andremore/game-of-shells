@@ -1,3 +1,4 @@
+import { Chances } from "./components/Chances";
 import { PostGame } from "./components/PostGame";
 import { gameState, resetGameState, setBallIndex, setShellsClickHandlers, settings } from "./state";
 import { gameIrrelevantClassNames, gameIrrelevantElementIds } from "./types/constants";
@@ -15,11 +16,41 @@ function destroyGameIrrelevantElements() {
     }
 }
 
-const shellClickHandler = (index: number) => {
-    PostGame(index === gameState.ballIndex);
+function resetGame(userWon: boolean) {
+    PostGame(userWon);
     document.getElementById(ContainerIds.SHELL)?.remove();
+    document.getElementById(ContainerIds.CHANCES)?.remove();
     resetGameState();
 }
+
+const shellClickHandler = (index: number, chancesSpan: HTMLSpanElement | null) => {
+    const isCorrectShell = index === gameState.ballIndex;
+
+    if (isCorrectShell) {
+        resetGame(isCorrectShell);
+        return;
+    }
+
+    gameState.chances--;
+
+    if (chancesSpan != null) {
+        chancesSpan.textContent = `${gameState.chances} chances left`;
+    }
+
+    if (gameState.chances <= 0) {
+        resetGame(isCorrectShell);
+        return;
+    }
+
+    const { element, handlerFn } = gameState.shells[index];
+
+    element.style.backgroundColor = 'red';
+    element.removeEventListener('click', handlerFn);
+    element.style.cursor = 'auto';
+
+    // TODO: Implement try again message
+};
+
 
 // TODO: Remove after completion, this is for debugging purposes
 function getRandomColor() {
@@ -31,7 +62,7 @@ function getRandomColor() {
     return color;
 }
 
-function createGameShells() {
+function createGameShells(chancesSpan: HTMLSpanElement | null) {
     const container = document.getElementById(ContainerIds.GAME);
 
     let shellContainer = document.getElementById(ContainerIds.SHELL);
@@ -51,7 +82,7 @@ function createGameShells() {
         shellContainer.appendChild(shell);
         gameState.shells.push({
             element: shell,
-            listener: () => shellClickHandler(i),
+            listener: () => shellClickHandler(i, chancesSpan),
             handlerFn: () => null
         });
     }
@@ -113,10 +144,16 @@ const shuffleShells = () => {
 
 export function startGame() {
     destroyGameIrrelevantElements();
-    createGameShells();
+
+    let chancesSpan: HTMLSpanElement | null = null;
+    if (settings.chances > 1) {
+        chancesSpan = Chances();
+    }
+
+    createGameShells(chancesSpan);
     setBallIndex();
     showBallInShellTemporarily().then(() => {
         shuffleShells();
-        setShellsClickHandlers();
+        setShellsClickHandlers(chancesSpan);
     });
 }
