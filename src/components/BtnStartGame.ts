@@ -1,4 +1,4 @@
-import { startGame } from "../startGame";
+import { startGame } from "../game/startGame";
 import { ContainerIds } from "../types/enums";
 
 export function BtnStartGame() {

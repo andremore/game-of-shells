@@ -1,4 +1,4 @@
-import { root, settingsMap } from "../constants";
+import { root, settingsMap } from "../utils/constants";
 import { ContainerIds, Difficulty } from "../types/enums";
 import { BtnDifficulty } from "./BtnDifficulty";
 
