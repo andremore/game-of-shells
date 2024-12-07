@@ -1,6 +1,6 @@
 import { startGame } from "../startGame";
-import { difficultyMap, root } from "../constants";
-import { ContainerIds, Difficulty } from "../types/enums";
+import { settingsMap, root } from "../constants";
+import { ContainerIds, DifficultySettings } from "../types/enums";
 import { setSettings } from "../state";
 
 export function MainLayout() {
@@ -20,14 +20,14 @@ export function MainLayout() {
   const difficultyContainer = document.createElement('div');
   difficultyContainer.id = ContainerIds.DIFFICULTY;
 
-  Object.keys(difficultyMap).forEach(difficulty => {
+  Object.keys(settingsMap).forEach(difficulty => {
     const btnDifficulty = document.createElement('button');
     btnDifficulty.type = 'button';
     btnDifficulty.classList.add('difficulty');
     btnDifficulty.textContent = difficulty;
 
     btnDifficulty.addEventListener('click', () => {
-      setSettings(difficulty as Difficulty)
+      setSettings(difficulty as DifficultySettings)
     });
 
     difficultyContainer.appendChild(btnDifficulty);

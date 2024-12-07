@@ -1,7 +1,7 @@
-import { ContainerIds, Difficulty, Mode, Speed } from "./types/enums";
+import { ContainerIds, DifficultySettings, Mode, Speed } from "./types/enums";
 import { Settings } from "./types/types";
 
-export const easyDifficulty: Settings = {
+export const easySettings: Settings = {
     shellNumber: 3,
     shuffleNumber: 2,
     speed: Speed.SLOW,
@@ -10,7 +10,7 @@ export const easyDifficulty: Settings = {
     displayBallTTl: 1500
 }
 
-export const normalDifficulty: Settings = {
+export const normalSettings: Settings = {
     shellNumber: 3,
     shuffleNumber: 3,
     speed: Speed.NORMAL,
@@ -19,7 +19,7 @@ export const normalDifficulty: Settings = {
     displayBallTTl: 1000
 }
 
-export const hardDifficulty: Settings = {
+export const hardSettings: Settings = {
     shellNumber: 4,
     shuffleNumber: 3,
     speed: Speed.FAST,
@@ -28,7 +28,7 @@ export const hardDifficulty: Settings = {
     displayBallTTl: 750
 }
 
-export const hardcoreDifficulty: Settings = {
+export const hardcoreSettings: Settings = {
     shellNumber: 6,
     shuffleNumber: 5,
     speed: Speed.HARDCORE,
@@ -37,11 +37,11 @@ export const hardcoreDifficulty: Settings = {
     displayBallTTl: 250
 }
 
-export const difficultyMap = {
-    [Difficulty.EASY]: easyDifficulty,
-    [Difficulty.NORMAL]: normalDifficulty,
-    [Difficulty.HARD]: hardDifficulty,
-    [Difficulty.HARDCORE]: hardcoreDifficulty
+export const settingsMap = {
+    [DifficultySettings.EASY]: easySettings,
+    [DifficultySettings.NORMAL]: normalSettings,
+    [DifficultySettings.HARD]: hardSettings,
+    [DifficultySettings.HARDCORE]: hardcoreSettings
 }
 
 export const root = document.querySelector<HTMLDivElement>('#app');

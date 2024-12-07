@@ -1,12 +1,12 @@
-import { difficultyMap, normalDifficulty } from "./constants";
-import { Difficulty } from "./types/enums";
+import { settingsMap, normalSettings } from "./constants";
+import { DifficultySettings } from "./types/enums";
 import { GameState, Settings } from "./types/types";
 
-export let settings: Settings = normalDifficulty;
+export let settings: Settings = normalSettings;
 
-export function setSettings(difficulty: Difficulty) {
-    settings = difficultyMap[difficulty];
-    gameState.chances = difficultyMap[difficulty].chances;
+export function setSettings(difficulty: DifficultySettings) {
+    settings = settingsMap[difficulty];
+    gameState.chances = settingsMap[difficulty].chances;
 }
 
 export const gameState: GameState = {
