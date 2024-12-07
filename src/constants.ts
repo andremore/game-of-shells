@@ -1,5 +1,5 @@
-import { Mode, Speed } from "./enums";
-import { Settings } from "./types";
+import { Mode, Speed } from "./types/enums";
+import { Settings } from "./types/types";
 
 export const defaultSettings: Settings = {
     shellNumber: 3,
@@ -7,7 +7,7 @@ export const defaultSettings: Settings = {
     speed: Speed.NORMAL,
     chances: 1,
     mode: Mode.DEFAULT
-}
+};
 
 export const root = document.querySelector<HTMLDivElement>('#app');
 

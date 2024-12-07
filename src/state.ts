@@ -1,4 +1,4 @@
-import { defaultSettings } from "./types/constants";
+import { defaultSettings } from "./constants";
 import { GameState, Settings } from "./types/types";
 
 export const settings: Settings = defaultSettings;
