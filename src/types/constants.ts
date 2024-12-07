@@ -8,4 +8,7 @@ export const defaultSettings: Settings = {
     mode: Mode.DEFAULT
 }
 
-export const gameIrrelevantElementIds = ['startGame', 'settings']
+export const root = document.querySelector<HTMLDivElement>('#app');
+
+export const gameIrrelevantElementIds = ['startGame', 'settings'];
+export const gameIrrelevantClassNames = ['.post-game'];

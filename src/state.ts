@@ -30,6 +30,14 @@ export function setShellsClickHandlers() {
 export function resetGameState() {
     let i = 0;
     for (; i < gameState.shells.length; i++) {
-        gameState.shells[i].element.removeEventListener('click', gameState.shells[i].handlerFn);
+        gameState.shells[i].element.removeEventListener(
+            'click',
+            gameState.shells[i].handlerFn
+        );
+
+        gameState.shells[i].element.remove();
     }
+
+    gameState.shells = [];
+    gameState.ballIndex = null;
 }

@@ -95,7 +95,7 @@ button:focus-visible {
   }
 }
 
-.shell-container {
+#shell-container {
   display: flex;
   justify-content: space-evenly;
 }
