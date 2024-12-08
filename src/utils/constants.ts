@@ -70,5 +70,5 @@ export const settingsInputsMap = {
 export const root = document.querySelector<HTMLDivElement>('#app');
 
 // FIXME:
-export const gameIrrelevantElementIds = ['start-game', 'settings', ContainerIds.DIFFICULTY];
+export const gameIrrelevantElementIds = ['start-game', ContainerIds.DIFFICULTY];
 export const gameIrrelevantClassNames = ['.post-game'];

@@ -6,15 +6,20 @@ import './style.css';
 import { SettingsController } from './controllers/SettingsController';
 
 function main() {
-  root?.appendChild(Title());
-  root?.appendChild(GameContainer());
+  const header = document.createElement('header');
 
   const btnSettings = BtnSettings();
   btnSettings.addEventListener('click', () => {
     SettingsController();
-  })
+  });
 
-  root?.appendChild(btnSettings);
+  header?.appendChild(btnSettings);
+  root?.appendChild(header);
+
+  const main = document.createElement('main');
+  main?.appendChild(Title());
+  main?.appendChild(GameContainer());
+  root?.appendChild(main);
 }
 
 main();
