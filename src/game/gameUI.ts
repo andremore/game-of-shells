@@ -2,6 +2,7 @@ import { ContainerIds } from "../types/enums";
 import { settingsStore } from "../stores/settingsStore";
 import { gameStore, setIsGameOngoing } from "../stores/gameStore";
 import { shellClickHandler } from "./gameLogic";
+import { VirtualPositions } from "../types/types";
 
 // FIXME: Move this to its own component
 export function createChances(): HTMLSpanElement | null {
@@ -19,16 +20,6 @@ export function createChances(): HTMLSpanElement | null {
     return chancesSpan;
 }
 
-// TODO: Remove after completion, this is for debugging purposes
-function getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
 export function createShells(chancesSpan: HTMLSpanElement | null): void {
     const gameContainer = document.getElementById(ContainerIds.GAME);
     let shellContainer = document.getElementById(ContainerIds.SHELL);
@@ -42,17 +33,11 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
     for (let i = 0; i < settingsStore.shellNumber; i++) {
         const shell = document.createElement('div');
         shell.classList.add('shell');
-        shell.style.backgroundColor = getRandomColor();
 
         const hat = document.createElement('img');
-        hat.src = '/public/hat.svg'; 
+        hat.src = '/public/hat.svg';
         hat.classList.add('hat');
-        const line = document.createElement('img');
-        line.src = '/public/line.svg';
-        line.classList.add('line');
-        shell.appendChild(line);
         shell.appendChild(hat);
-
 
         shellContainer.appendChild(shell);
         gameStore.shells.push({
@@ -65,7 +50,21 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
     gameContainer?.appendChild(shellContainer);
 }
 
+const extractCurrentTranslateX = (element: HTMLElement): number => {
+    const transform = window.getComputedStyle(element).transform;
+
+    if (transform === "none") {
+        return 0;
+    }
+
+    console.log(transform);
+
+    const matrix = new DOMMatrix(transform);
+    return matrix.m41;
+};
+
 export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
+    const virtualPositions: VirtualPositions = {};
     const shellContainer = document.getElementById(ContainerIds.SHELL);
 
     if (!shellContainer) {
@@ -73,6 +72,10 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     };
 
     const childrenArray = Array.from(shellContainer.children) as HTMLDivElement[];
+
+    childrenArray.forEach((child, index) => {
+        virtualPositions[index] = child.getBoundingClientRect().left;
+    });
 
     const performShuffle = (shuffleIndex: number): void => {
         const firstRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
@@ -83,16 +86,37 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
         } while (secondRandomShellIndex === firstRandomShellIndex);
 
         const firstShellElement = childrenArray[firstRandomShellIndex];
-        childrenArray[firstRandomShellIndex] = childrenArray[secondRandomShellIndex];
-        childrenArray[secondRandomShellIndex] = firstShellElement;
+        const secondShellElement = childrenArray[secondRandomShellIndex];
 
-        childrenArray.forEach(child => shellContainer.appendChild(child));
+        const firstShellPosition = virtualPositions[firstRandomShellIndex];
+        const secondShellPosition = virtualPositions[secondRandomShellIndex];
+
+        const distanceToMoveFirst = secondShellPosition - firstShellPosition;
+        const distanceToMoveSecond = -distanceToMoveFirst;
+
+        const currentTranslateXFirst = extractCurrentTranslateX(firstShellElement);
+        const currentTranslateXSecond = extractCurrentTranslateX(secondShellElement);
+
+        const newTranslateXFirst = currentTranslateXFirst + distanceToMoveFirst;
+        const newTranslateXSecond = currentTranslateXSecond + distanceToMoveSecond;
+
+        firstShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
+        secondShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
+
+        firstShellElement.style.transform = `translateX(${newTranslateXFirst}px)`;
+        secondShellElement.style.transform = `translateX(${newTranslateXSecond}px)`;
+
+        virtualPositions[firstRandomShellIndex] = secondShellPosition;
+        virtualPositions[secondRandomShellIndex] = firstShellPosition;
 
         if (shuffleIndex < settingsStore.shuffleNumber - 1) {
             setTimeout(() => performShuffle(shuffleIndex + 1), settingsStore.speed);
         } else {
-            setIsGameOngoing(false);
-            callbacksToRunAfterShuffle();
+            setTimeout(() => {
+                console.log('swap');
+                setIsGameOngoing(false);
+                callbacksToRunAfterShuffle();
+            }, settingsStore.speed);
         }
     }
 

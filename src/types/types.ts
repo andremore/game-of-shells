@@ -22,3 +22,7 @@ export type GameStore = {
     chancesLeft: number
     isGameOngoing: boolean
 }
+
+export type VirtualPositions = {
+    [shellIndex: number]: number
+}

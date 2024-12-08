@@ -99,7 +99,7 @@ button:focus-visible {
 #shell-container {
   display: flex;
   justify-content: space-evenly;
-  gap: 3em;
+  gap: 4em;
 }
 
 .shell {
@@ -119,20 +119,15 @@ button:focus-visible {
 }
 
 .hat {
+  position: absolute;
   width: 5em;
-  margin-left: 11%;
   z-index: 3;
 }
 
-.line {
-  position: relative;
-  left: -65%;
-  top: 105%;
-  width: 3em;
-  filter: invert(1) saturate(0);
-}
-
 #ball {
+  position: absolute;
+  top: 105%;
+  left: 18%;
   width: 2.5em;
   height: 2.5em;
   border-radius: 50%;

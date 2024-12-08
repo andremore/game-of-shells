@@ -23,7 +23,7 @@ export enum Difficulty {
 
 export enum Speed {
     SLOW = 500,
-    NORMAL = 250,
+    NORMAL = 1000,
     FAST = 150,
     HARDCORE = 50
 }
