@@ -1,6 +1,6 @@
 import { BtnRestart } from "../components/Button/BtnRestart";
 import { BtnStartGame } from "../components/Button/BtnStartGame";
-import { setBallIndex, setShellsClickHandlers } from "../stores/gameStore";
+import { gameStore, setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { ContainerIds } from "../types/enums";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
@@ -20,34 +20,44 @@ export function startGame(): void {
 
     createShells(chancesSpan);
     setBallIndex();
-    showBallInShellTemporarily().then(() => {
-        shuffleShells();
-        setShellsClickHandlers(chancesSpan);
-    });
+
+    let btnRestart: HTMLButtonElement;
 
     if (!document.querySelector('#btn-restart')) {
         const header = document.querySelector('header');
-        const btnRestart = BtnRestart();
-
-        btnRestart.addEventListener('click', () => {
-            resetGame();
-
-            const postGameMsg = document.getElementById('post-game-msg');
-            const postGameBtn = document.getElementById('post-game-btn');
-            postGameMsg?.remove();
-            postGameBtn?.remove();
-
-            btnSettings.style.display = 'block';
-            btnRestart.style.display = 'none';
-
-            const container = document.getElementById(ContainerIds.GAME);
-            container?.appendChild(BtnStartGame());
-        });
+        btnRestart = BtnRestart();
 
         header?.appendChild(btnRestart);
-        return;
     }
 
-    const btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
+    btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
     btnRestart.style.display = 'block';
+
+    setIsGameOngoing(true);
+    showBallInShellTemporarily().then(() => {
+        shuffleShells(() => {
+            setShellsClickHandlers(chancesSpan);
+
+            btnRestart.addEventListener('click', () => {
+                if (gameStore.isGameOngoing) {
+                    return;
+                }
+
+                resetGame();
+
+                const postGameMsg = document.getElementById('post-game-msg');
+                const postGameBtn = document.getElementById('post-game-btn');
+                postGameMsg?.remove();
+                postGameBtn?.remove();
+
+                btnSettings.style.display = 'block';
+                btnRestart.style.display = 'none';
+
+                if (!document.getElementById(ContainerIds.START_GAME)) {
+                    const container = document.getElementById(ContainerIds.GAME);
+                    container?.appendChild(BtnStartGame());
+                }
+            });
+        });
+    });
 }
