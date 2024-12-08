@@ -1,5 +1,5 @@
 import { SettingsKeys } from "../types/enums";
-import { ModalInputNumber } from "./ModalInputNumber";
+import { ModalInputNumber } from "./InputNumber";
 
 export function SettingsModal() {
     const overlay = document.createElement('div');

@@ -1,6 +1,5 @@
-import { BtnSettings } from './components/BtnSettings';
+import { BtnSettings } from './components/Button/BtnSettings';
 import { GameContainer } from './components/GameContainer';
-import { Title } from './components/Title';
 import { root } from './utils/constants';
 import './style.css';
 import { SettingsController } from './controllers/SettingsController';
@@ -17,7 +16,12 @@ function main() {
   root?.appendChild(header);
 
   const main = document.createElement('main');
-  main?.appendChild(Title());
+
+  const title = document.createElement('h1');
+  title.textContent = 'Game of Shells';
+  title.id = 'title';
+
+  main?.appendChild(title);
   main?.appendChild(GameContainer());
   root?.appendChild(main);
 }
