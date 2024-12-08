@@ -1,9 +1,16 @@
-export enum SettingsKeys {
+export enum SettingsStoreKeys {
     CHANCES = 'chances',
     SHELL_NUMBER = 'shellNumber',
     SHUFFLE_NUMBER = 'shuffleNumber',
     SPEED = 'speed',
     DISPLAY_BALL_TTL = 'displayBallTTl'
+}
+
+export enum GameStoreKeys {
+    SHELLS = 'shells',
+    BALL_INDEX = 'ballIndex',
+    CHANCES_LEFT = 'chancesLeft',
+    IS_GAME_ON_GOING = 'isGameOngoing' 
 }
 
 export enum Difficulty {

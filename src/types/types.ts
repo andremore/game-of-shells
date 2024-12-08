@@ -19,6 +19,6 @@ export type Shell = {
 export type GameStore = {
     shells: Shell[]
     ballIndex: number | null
-    chances: number
+    chancesLeft: number
     isGameOngoing: boolean
 }

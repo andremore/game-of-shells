@@ -1,4 +1,4 @@
-import { ContainerIds, Difficulty, Mode, SettingsKeys, Speed } from "../types/enums";
+import { ContainerIds, Difficulty, Mode, SettingsStoreKeys, Speed } from "../types/enums";
 import { SettingsStore } from "../types/types";
 
 export const easySettings: SettingsStore = {
@@ -49,23 +49,23 @@ export const settingsMap = {
 }
 
 export const settingsInputsMap = {
-    [SettingsKeys.CHANCES]: {
+    [SettingsStoreKeys.CHANCES]: {
         label: 'Chances:',
         key: 'chances'
     },
-    [SettingsKeys.SHELL_NUMBER]: {
+    [SettingsStoreKeys.SHELL_NUMBER]: {
         label: 'Shells:',
         key: 'shellNumber'
     },
-    [SettingsKeys.SHUFFLE_NUMBER]: {
+    [SettingsStoreKeys.SHUFFLE_NUMBER]: {
         label: 'Shell Shuffles:',
         key: 'shuffleNumber'
     },
-    [SettingsKeys.SPEED]: {
+    [SettingsStoreKeys.SPEED]: {
         label: 'Shuffle Speed:',
         key: 'speed'
     },
-    [SettingsKeys.DISPLAY_BALL_TTL]: {
+    [SettingsStoreKeys.DISPLAY_BALL_TTL]: {
         label:'Display ball time:',
         key: 'displayBallTTl'
     }

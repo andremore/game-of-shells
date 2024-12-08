@@ -11,7 +11,7 @@ export function createChances(): HTMLSpanElement | null {
     
         const chancesSpan = document.createElement('span');
         chancesSpan.id = 'chances';
-        chancesSpan.textContent = `${gameStore.chances} chances left`;
+        chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
         chancesContainer.appendChild(chancesSpan);
     
         const container = document.getElementById(ContainerIds.GAME);
@@ -21,7 +21,7 @@ export function createChances(): HTMLSpanElement | null {
     }
 
     const chancesSpan = document.getElementById('chances') as HTMLSpanElement;
-    chancesSpan.textContent = `${gameStore.chances} chances left`;
+    chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
 
     return chancesSpan;
 }

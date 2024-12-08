@@ -9,13 +9,13 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
         return;
     }
 
-    gameStore.chances--;
+    gameStore.chancesLeft--;
 
     if (chancesSpan != null) {
-        chancesSpan.textContent = `${gameStore.chances} chances left`;
+        chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     }
 
-    if (gameStore.chances <= 0) {
+    if (gameStore.chancesLeft <= 0) {
         endGame(isCorrectShell);
         return;
     }
@@ -30,6 +30,7 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
 }
 
 export function resetGame() {
+    // FIXME: These id's
     document.getElementById('gameShell')?.remove();
     document.getElementById('gameChances')?.remove();
     resetGameState();

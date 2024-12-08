@@ -1,4 +1,4 @@
-import { SettingsKeys } from "../types/enums";
+import { SettingsStoreKeys } from "../types/enums";
 import { ModalInputNumber } from "./InputNumber";
 
 export function SettingsModal() {
@@ -30,8 +30,8 @@ export function SettingsModal() {
     const inputContainer = document.createElement('form');
     inputContainer.id = 'modal-input-container';
 
-    Object.values(SettingsKeys).forEach(key => {
-        inputContainer.appendChild(ModalInputNumber(key as SettingsKeys));
+    Object.values(SettingsStoreKeys).forEach(key => {
+        inputContainer.appendChild(ModalInputNumber(key as SettingsStoreKeys));
     });
 
     modalContent.appendChild(inputContainer);

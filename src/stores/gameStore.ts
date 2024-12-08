@@ -1,23 +1,28 @@
+import { GameStoreKeys } from "../types/enums";
 import { GameStore } from "../types/types";
 import { settingsStore } from "./settingsStore";
 
 export const gameStore: GameStore = {
     shells: [],
     ballIndex: null,
-    chances: settingsStore.chances,
+    chancesLeft: settingsStore.chances,
     isGameOngoing: false
 };
 
-export function setIsGameOngoing(isShuffling: boolean) {
-    gameStore.isGameOngoing = isShuffling;
+function setGameStore<T extends keyof GameStore>(key: T, value: GameStore[T]) {
+    gameStore[key] = value;
 }
 
-export function setChances(chances: number) {
-    gameStore.chances = chances;
+export function setIsGameOngoing(isShuffling: boolean) {
+    setGameStore(GameStoreKeys.IS_GAME_ON_GOING, isShuffling);
+}
+
+export function setChancesLeft(chancesLeft: number) {
+    setGameStore(GameStoreKeys.CHANCES_LEFT, chancesLeft);
 }
 
 export function setBallIndex() {
-    gameStore.ballIndex = Math.floor(Math.random() * gameStore.shells.length);
+    setGameStore(GameStoreKeys.BALL_INDEX, Math.floor(Math.random() * gameStore.shells.length));
 }
 
 export function setShellsClickHandlers(chancesSpan: HTMLSpanElement | null) {
@@ -48,5 +53,6 @@ export function resetGameState() {
 
     gameStore.shells = [];
     gameStore.ballIndex = null;
-    gameStore.chances = settingsStore.chances;
+    gameStore.chancesLeft = settingsStore.chances;
+    gameStore.isGameOngoing = false;
 }
