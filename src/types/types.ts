@@ -1,4 +1,4 @@
-import { Mode, Speed } from "./enums"
+import { Difficulty, Mode, Speed } from "./enums"
 
 export type SettingsStore = {
     shellNumber: number
@@ -7,6 +7,7 @@ export type SettingsStore = {
     chances: number
     mode: Mode
     displayBallTTl: number
+    difficulty: Difficulty
 }
 
 export type Shell = {
