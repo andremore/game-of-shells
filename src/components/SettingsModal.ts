@@ -1,10 +1,12 @@
-import { setSettings } from "../stores/settingsStore";
+import { setSettings, settingsStore } from "../stores/settingsStore";
 import { Mode, SettingsKeys } from "../types/enums";
 import { SettingsStore } from "../types/types";
 import { DifficultyContainer } from "./DifficultyContainer";
 import { ModalInputNumber } from "./ModalInputNumber";
 
 export function SettingsModal() {
+    const currentSettingsStoreVals = JSON.parse(JSON.stringify(settingsStore));
+
     const overlay = document.createElement('div');
     overlay.id = 'modal-overlay';
     overlay.classList.add('overlay');
@@ -42,10 +44,10 @@ export function SettingsModal() {
     const actionsContainer = document.createElement('div');
     actionsContainer.id = 'actions-container';
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Close';
-    closeButton.addEventListener('click', closeModal);
-    actionsContainer.appendChild(closeButton);
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.addEventListener('click', () => closeModal(true));
+    actionsContainer.appendChild(cancelButton);
 
     const applyButton = document.createElement('button');
     applyButton.type = 'submit';
@@ -55,7 +57,20 @@ export function SettingsModal() {
 
     modalDialog.appendChild(modalContent);
     document.body.appendChild(modalDialog);
-    DifficultyContainer(false);
+
+    function updateModalInputs() {
+        // FIXME: Fix this type
+        const inputs = inputContainer.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
+
+        inputs.forEach(input => {
+            const key = input.name as keyof SettingsStore;
+            if (settingsStore[key]) {
+                input.value = settingsStore[key].toString();
+            }
+        });
+    }
+
+    DifficultyContainer(updateModalInputs);
 
     modalDialog.showModal();
 
@@ -78,7 +93,11 @@ export function SettingsModal() {
 
     applyButton.addEventListener('click', submitHandler);
 
-    function closeModal() {
+    function closeModal(isCanceling = false) {
+        if (isCanceling) {
+            setSettings(currentSettingsStoreVals);
+        }
+
         modalDialog.close();
         applyButton.removeEventListener('click', submitHandler);
         document.body.removeChild(modalDialog);
