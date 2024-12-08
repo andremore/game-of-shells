@@ -68,9 +68,11 @@ export function showBallInShellTemporarily(): Promise<void> {
     return new Promise<void>((resolve) => {
         setTimeout(() => {
             shellToAddBall.appendChild(ball);
+            shellToAddBall.style.transform = 'translateY(-50px)';
 
             setTimeout(() => {
                 ball.remove();
+                shellToAddBall.style.transform = '';
                 resolve();
             }, 1500);
         }, 250);
