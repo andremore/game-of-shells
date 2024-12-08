@@ -1,8 +1,6 @@
 import { BtnRestart } from "../components/Button/BtnRestart";
-import { BtnStartGame } from "../components/Button/BtnStartGame";
 import { gameStore, setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
-import { ContainerIds } from "../types/enums";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
 import { resetGame, showBallInShellTemporarily } from "./gameLogic";
 import { createChances, createShells, shuffleShells } from "./gameUI";
@@ -43,20 +41,10 @@ export function startGame(): void {
                     return;
                 }
 
-                resetGame();
+                resetGame(btnSettings, btnRestart);
 
-                const postGameMsg = document.getElementById('post-game-msg');
-                const postGameBtn = document.getElementById('post-game-btn');
-                postGameMsg?.remove();
-                postGameBtn?.remove();
-
-                btnSettings.style.display = 'block';
-                btnRestart.style.display = 'none';
-
-                if (!document.getElementById(ContainerIds.START_GAME)) {
-                    const container = document.getElementById(ContainerIds.GAME);
-                    container?.appendChild(BtnStartGame());
-                }
+                document.getElementById('post-game-msg')?.remove();
+                document.getElementById('post-game-btn')?.remove();
             });
         });
     });

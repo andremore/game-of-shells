@@ -2,7 +2,7 @@ import { startGame } from "../game/startGame";
 import { ContainerIds } from "../types/enums";
 
 export function PostGame(userWon: boolean) {
-    const container = document.getElementById(ContainerIds.GAME);
+    const gameContainer = document.getElementById(ContainerIds.GAME);
 
     const message = document.createElement('h2');
     message.id = 'post-game-msg';
@@ -22,6 +22,6 @@ export function PostGame(userWon: boolean) {
     message.classList.add('post-game');
     btnPlayAgain.classList.add('post-game');
 
-    container?.appendChild(message);
-    container?.appendChild(btnPlayAgain);
+    gameContainer?.appendChild(message);
+    gameContainer?.appendChild(btnPlayAgain);
 }

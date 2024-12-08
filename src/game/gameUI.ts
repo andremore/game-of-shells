@@ -13,14 +13,14 @@ export function createChances(): HTMLSpanElement | null {
     chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     chancesContainer.appendChild(chancesSpan);
 
-    const container = document.getElementById(ContainerIds.GAME);
-    container?.appendChild(chancesContainer);
+    const gameContainer = document.getElementById(ContainerIds.GAME);
+    gameContainer?.appendChild(chancesContainer);
 
     return chancesSpan;
 }
 
 export function createShells(chancesSpan: HTMLSpanElement | null): void {
-    const container = document.getElementById(ContainerIds.GAME);
+    const gameContainer = document.getElementById(ContainerIds.GAME);
     let shellContainer = document.getElementById(ContainerIds.SHELL);
 
     if (!shellContainer) {
@@ -42,7 +42,7 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
         });
     }
 
-    container?.appendChild(shellContainer);
+    gameContainer?.appendChild(shellContainer);
 }
 
 export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
