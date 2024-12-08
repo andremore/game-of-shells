@@ -1,4 +1,4 @@
-import { setSettings } from "../stores/settingsStore";
+import { setSettingsBasedOnPresets } from "../stores/settingsStore";
 import { Difficulty } from "../types/enums";
 
 export function BtnDifficulty(difficulty: Difficulty) {
@@ -8,7 +8,7 @@ export function BtnDifficulty(difficulty: Difficulty) {
     btnDifficulty.textContent = difficulty;
 
     btnDifficulty.addEventListener('click', () => {
-        setSettings(difficulty as Difficulty)
+        setSettingsBasedOnPresets(difficulty as Difficulty)
     });
 
     return btnDifficulty;

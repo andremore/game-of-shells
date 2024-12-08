@@ -1,3 +1,11 @@
+export enum SettingsKeys {
+    CHANCES = 'chances',
+    SHELL_NUMBER = 'shellNumber',
+    SHUFFLE_NUMBER = 'shuffleNumber',
+    SPEED = 'speed',
+    DISPLAY_BALL_TTL = 'displayBallTTl'
+}
+
 export enum Difficulty {
     EASY = 'easy',
     NORMAL = 'normal',

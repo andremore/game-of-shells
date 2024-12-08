@@ -5,7 +5,12 @@ import { setChances } from "./gameStore";
 
 export let settingsStore: SettingsStore = normalSettings;
 
-export function setSettings(difficulty: Difficulty) {
+export function setSettingsBasedOnPresets(difficulty: Difficulty) {
     settingsStore = settingsMap[difficulty];
     setChances(settingsMap[difficulty].chances);
+}
+
+export function setSettings(newSettings: SettingsStore) {
+   settingsStore = newSettings;
+   setChances(newSettings.chances);
 }
