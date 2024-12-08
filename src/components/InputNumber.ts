@@ -1,9 +1,9 @@
 import { settingsStore } from "../stores/settingsStore";
-import { SettingsKeys } from "../types/enums";
+import { SettingsStoreKeys } from "../types/enums";
 import { SettingsStore } from "../types/types";
 import { settingsInputsMap } from "../utils/constants";
 
-export function ModalInputNumber(settingsKey: SettingsKeys) {
+export function ModalInputNumber(settingsKey: SettingsStoreKeys) {
     const { label, key } = settingsInputsMap[settingsKey];
     const labelEl = document.createElement('label');
     labelEl.textContent = label;

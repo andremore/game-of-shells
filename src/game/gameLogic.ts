@@ -1,5 +1,7 @@
+import { BtnStartGame } from "../components/Button/BtnStartGame";
 import { PostGame } from "../components/PostGame";
 import { gameStore, resetGameState } from "../stores/gameStore";
+import { ContainerIds } from "../types/enums";
 
 export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | null): void {
     const isCorrectShell = index === gameStore.ballIndex;
@@ -9,13 +11,13 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
         return;
     }
 
-    gameStore.chances--;
+    gameStore.chancesLeft--;
 
     if (chancesSpan != null) {
-        chancesSpan.textContent = `${gameStore.chances} chances left`;
+        chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     }
 
-    if (gameStore.chances <= 0) {
+    if (gameStore.chancesLeft <= 0) {
         endGame(isCorrectShell);
         return;
     }
@@ -25,13 +27,25 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     element.style.backgroundColor = 'red';
     element.removeEventListener('click', handlerFn);
     element.style.cursor = 'auto';
-
-    // TODO: Implement try again message
 }
 
-export function resetGame() {
-    document.getElementById('gameShell')?.remove();
-    document.getElementById('gameChances')?.remove();
+export function resetGame(btnSettings?: HTMLButtonElement, btnRestart?: HTMLButtonElement) {
+    document.getElementById(ContainerIds.SHELL)?.remove();
+    document.getElementById(ContainerIds.CHANCES)?.remove();
+
+    if (btnSettings && btnRestart) {
+        btnSettings.style.display = 'block';
+        btnRestart.style.display = 'none';
+    }
+
+    if (
+        !document.getElementById(ContainerIds.START_GAME)
+        && !document.getElementById('post-game-msg')
+    ) {
+        const gameContainer = document.getElementById(ContainerIds.GAME);
+        gameContainer?.appendChild(BtnStartGame());
+    }
+
     resetGameState();
 }
 
