@@ -1,5 +1,5 @@
 import { ContainerIds } from "../types/enums";
-import { BtnStartGame } from "./BtnStartGame";
+import { BtnStartGame } from "./Button/BtnStartGame";
 
 export function GameContainer() {
     const container = document.createElement('div');

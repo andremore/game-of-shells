@@ -1,5 +1,5 @@
-import { BtnRestart } from "../components/BtnRestart";
-import { BtnStartGame } from "../components/BtnStartGame";
+import { BtnRestart } from "../components/Button/BtnRestart";
+import { BtnStartGame } from "../components/Button/BtnStartGame";
 import { setBallIndex, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { ContainerIds } from "../types/enums";

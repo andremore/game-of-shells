@@ -32,3 +32,9 @@ export enum ContainerIds {
     CHANCES = 'chances-container',
     DIFFICULTY = 'difficulty-container'
 }
+
+export enum ButtonType {
+    SUBMIT = 'submit',
+    BUTTON = 'button',
+    RESET = 'reset'
+}

@@ -1,7 +1,7 @@
 import { setSettingsBasedOnPresets } from "../stores/settingsStore";
 import { ContainerIds, Difficulty } from "../types/enums";
 import { settingsMap } from "../utils/constants";
-import { BtnDifficulty } from "./BtnDifficulty";
+import { BtnDifficulty } from "./Button/BtnDifficulty";
 
 export function DifficultyContainer(updateModalInputs: () => void) {
   const difficultyContainer = document.createElement('div');
