@@ -1,12 +1,7 @@
-import { setSettings, settingsStore } from "../stores/settingsStore";
-import { Mode, SettingsKeys } from "../types/enums";
-import { SettingsStore } from "../types/types";
-import { DifficultyContainer } from "./DifficultyContainer";
+import { SettingsKeys } from "../types/enums";
 import { ModalInputNumber } from "./ModalInputNumber";
 
 export function SettingsModal() {
-    const currentSettingsStoreVals = JSON.parse(JSON.stringify(settingsStore));
-
     const overlay = document.createElement('div');
     overlay.id = 'modal-overlay';
     overlay.classList.add('overlay');
@@ -37,7 +32,7 @@ export function SettingsModal() {
 
     Object.values(SettingsKeys).forEach(key => {
         inputContainer.appendChild(ModalInputNumber(key as SettingsKeys));
-    })
+    });
 
     modalContent.appendChild(inputContainer);
 
@@ -46,7 +41,6 @@ export function SettingsModal() {
 
     const cancelButton = document.createElement('button');
     cancelButton.textContent = 'Cancel';
-    cancelButton.addEventListener('click', () => closeModal(true));
     actionsContainer.appendChild(cancelButton);
 
     const applyButton = document.createElement('button');
@@ -58,51 +52,5 @@ export function SettingsModal() {
     modalDialog.appendChild(modalContent);
     document.body.appendChild(modalDialog);
 
-    function updateModalInputs() {
-        // FIXME: Fix this type
-        const inputs = inputContainer.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
-
-        inputs.forEach(input => {
-            const key = input.name as keyof SettingsStore;
-            if (settingsStore[key]) {
-                input.value = settingsStore[key].toString();
-            }
-        });
-    }
-
-    DifficultyContainer(updateModalInputs);
-
-    modalDialog.showModal();
-
-    const submitHandler = (e: Event) => {
-        e.preventDefault();
-
-        const formData = new FormData(inputContainer);
-        const formValues: Record<string, string> = {};
-
-        formData.forEach((value, key) => {
-            formValues[key] = value as string;
-        });
-
-        // TODO: Remove this when implemented
-        formValues.mode = Mode.DEFAULT;
-        // FIXME: Fix this type
-        setSettings(formValues as unknown as SettingsStore);
-        closeModal();
-    }
-
-    applyButton.addEventListener('click', submitHandler);
-
-    function closeModal(isCanceling = false) {
-        if (isCanceling) {
-            setSettings(currentSettingsStoreVals);
-        }
-
-        modalDialog.close();
-        applyButton.removeEventListener('click', submitHandler);
-        document.body.removeChild(modalDialog);
-        document.body.removeChild(overlay);
-    }
-
-    return modalDialog;
+    return { modalDialog, applyButton, inputContainer, cancelButton };
 }

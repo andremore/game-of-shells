@@ -3,7 +3,7 @@ import { GameContainer } from './components/GameContainer';
 import { Title } from './components/Title';
 import { root } from './utils/constants';
 import './style.css';
-import { SettingsModal } from './components/SettingsModal';
+import { SettingsController } from './controllers/SettingsController';
 
 function main() {
   root?.appendChild(Title());
@@ -11,7 +11,7 @@ function main() {
 
   const btnSettings = BtnSettings();
   btnSettings.addEventListener('click', () => {
-    SettingsModal();
+    SettingsController();
   })
 
   root?.appendChild(btnSettings);
