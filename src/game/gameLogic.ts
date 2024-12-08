@@ -60,7 +60,7 @@ export function showBallInShellTemporarily(): Promise<void> {
     }
 
     const ball = document.createElement('img');
-    ball.src = '/public/ball.svg';
+    ball.src = '/ball.svg';
     ball.id = 'ball';
 
     const shellToAddBall = gameStore.shells[gameStore.ballIndex].element;
