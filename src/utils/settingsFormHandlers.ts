@@ -1,5 +1,5 @@
 import { setSettings } from "../stores/settingsStore";
-import { Mode } from "../types/enums";
+import { Difficulty, Mode } from "../types/enums";
 import { SettingsStore } from "../types/types";
 
 export function handleSubmit(
@@ -16,6 +16,14 @@ export function handleSubmit(
         formData.forEach((value, key) => {
             formValues[key] = value as string;
         });
+
+        const selectedDifficultyEl = document.querySelector('.selected-difficulty');
+
+        if (selectedDifficultyEl == null) {
+            formValues.difficulty = Difficulty.CUSTOM;
+        } else {
+            formValues.difficulty = selectedDifficultyEl.textContent as string;
+        }
 
         // TODO: Remove when implemented
         formValues.mode = Mode.DEFAULT;

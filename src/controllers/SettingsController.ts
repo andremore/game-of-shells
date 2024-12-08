@@ -24,7 +24,7 @@ export function SettingsController() {
         });
     }
 
-    DifficultyContainer(updateModalInputs);
+    DifficultyContainer(updateModalInputs, settingsStore.difficulty);
 
     modalDialog.showModal();
 

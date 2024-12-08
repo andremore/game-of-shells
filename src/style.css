@@ -130,10 +130,6 @@ button:focus-visible {
   text-align: right;
 }
 
-.difficulty {
-  text-transform: capitalize;
-}
-
 .overlay {
   position: fixed;
   top: 0;
@@ -165,12 +161,18 @@ button:focus-visible {
 
 .modal-content .modal-difficulty-container {
   display: flex;
+  gap: 1em;
 }
 
 .modal-content .modal-difficulty-container > button {
   font-size: 1.2rem;
   background-color: transparent;
   font-weight: normal;
+  text-transform: capitalize;
+}
+
+.selected-difficulty {
+  background-color: #1a1a1a !important;
 }
 
 .modal-content input {

@@ -7,7 +7,8 @@ export const easySettings: SettingsStore = {
     speed: Speed.SLOW,
     chances: 2,
     mode: Mode.DEFAULT,
-    displayBallTTl: 1500
+    displayBallTTl: 1500,
+    difficulty: Difficulty.EASY
 }
 
 export const normalSettings: SettingsStore = {
@@ -16,7 +17,8 @@ export const normalSettings: SettingsStore = {
     speed: Speed.NORMAL,
     chances: 1,
     mode: Mode.DEFAULT,
-    displayBallTTl: 1000
+    displayBallTTl: 1000,
+    difficulty: Difficulty.NORMAL
 }
 
 export const hardSettings: SettingsStore = {
@@ -25,7 +27,8 @@ export const hardSettings: SettingsStore = {
     speed: Speed.FAST,
     chances: 1,
     mode: Mode.DEFAULT,
-    displayBallTTl: 750
+    displayBallTTl: 750,
+    difficulty: Difficulty.HARD
 }
 
 export const hardcoreSettings: SettingsStore = {
@@ -34,7 +37,8 @@ export const hardcoreSettings: SettingsStore = {
     speed: Speed.HARDCORE,
     chances: 1,
     mode: Mode.DEFAULT,
-    displayBallTTl: 250
+    displayBallTTl: 250,
+    difficulty: Difficulty.HARDCORE
 }
 
 export const settingsMap = {

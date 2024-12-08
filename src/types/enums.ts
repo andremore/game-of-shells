@@ -10,7 +10,8 @@ export enum Difficulty {
     EASY = 'easy',
     NORMAL = 'normal',
     HARD = 'hard',
-    HARDCORE = 'hardcore'
+    HARDCORE = 'hardcore',
+    CUSTOM = 'custom'
 }
 
 export enum Speed {
