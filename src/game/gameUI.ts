@@ -35,7 +35,7 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
         shell.classList.add('shell');
 
         const hat = document.createElement('img');
-        hat.src = '/public/hat.svg';
+        hat.src = '/hat.svg';
         hat.classList.add('hat');
         shell.appendChild(hat);
 
