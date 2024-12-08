@@ -32,7 +32,16 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
     for (let i = 0; i < settingsStore.shellNumber; i++) {
         const shell = document.createElement('div');
         shell.classList.add('shell');
-        shell.style.backgroundColor = getRandomColor(); // You can remove this line for production
+
+        const hat = document.createElement('img');
+        hat.src = '/public/hat.svg'; 
+        hat.classList.add('hat');
+        const line = document.createElement('img');
+        line.src = '/public/line.svg';
+        line.classList.add('line');
+        shell.appendChild(line);
+        shell.appendChild(hat);
+
 
         shellContainer.appendChild(shell);
         gameStore.shells.push({
@@ -76,14 +85,4 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     }
 
     performShuffle(0);
-}
-
-// TODO: Remove after completion, this is for debugging purposes
-function getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
 }
