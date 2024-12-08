@@ -5,7 +5,7 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     const isCorrectShell = index === gameStore.ballIndex;
 
     if (isCorrectShell) {
-        resetGame(isCorrectShell);
+        endGame(isCorrectShell);
         return;
     }
 
@@ -16,7 +16,7 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     }
 
     if (gameStore.chances <= 0) {
-        resetGame(isCorrectShell);
+        endGame(isCorrectShell);
         return;
     }
 
@@ -29,11 +29,15 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     // TODO: Implement try again message
 }
 
-export function resetGame(userWon: boolean): void {
-    PostGame(userWon);
+export function resetGame() {
     document.getElementById('gameShell')?.remove();
     document.getElementById('gameChances')?.remove();
     resetGameState();
+}
+
+export function endGame(userWon: boolean): void {
+    PostGame(userWon);
+    resetGame();
 }
 
 export function showBallInShellTemporarily(): Promise<void> {

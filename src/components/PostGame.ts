@@ -5,6 +5,7 @@ export function PostGame(userWon: boolean) {
     const container = document.getElementById(ContainerIds.GAME);
 
     const message = document.createElement('h2');
+    message.id = 'post-game-msg';
 
     if (userWon) {
         message.textContent = 'You Won!';
@@ -13,6 +14,7 @@ export function PostGame(userWon: boolean) {
     }
 
     const btnPlayAgain = document.createElement('button');
+    btnPlayAgain.id = 'post-game-btn';
     btnPlayAgain.type = 'button';
     btnPlayAgain.textContent = '⟳ Play Again';
     btnPlayAgain.addEventListener('click', startGame)
