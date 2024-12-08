@@ -1,5 +1,6 @@
 import { PostGame } from "../components/PostGame";
 import { gameStore, resetGameState } from "../stores/gameStore";
+import { ContainerIds } from "../types/enums";
 
 export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | null): void {
     const isCorrectShell = index === gameStore.ballIndex;
@@ -25,14 +26,11 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     element.style.backgroundColor = 'red';
     element.removeEventListener('click', handlerFn);
     element.style.cursor = 'auto';
-
-    // TODO: Implement try again message
 }
 
 export function resetGame() {
-    // FIXME: These id's
-    document.getElementById('gameShell')?.remove();
-    document.getElementById('gameChances')?.remove();
+    document.getElementById(ContainerIds.SHELL)?.remove();
+    document.getElementById(ContainerIds.CHANCES)?.remove();
     resetGameState();
 }
 

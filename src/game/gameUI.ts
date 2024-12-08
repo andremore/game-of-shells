@@ -5,23 +5,16 @@ import { shellClickHandler } from "./gameLogic";
 
 // FIXME: Move this to its own component
 export function createChances(): HTMLSpanElement | null {
-    if (!document.getElementById('chances')) {
-        const chancesContainer = document.createElement('div');
-        chancesContainer.id = ContainerIds.CHANCES;
-    
-        const chancesSpan = document.createElement('span');
-        chancesSpan.id = 'chances';
-        chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
-        chancesContainer.appendChild(chancesSpan);
-    
-        const container = document.getElementById(ContainerIds.GAME);
-        container?.appendChild(chancesContainer);
+    const chancesContainer = document.createElement('div');
+    chancesContainer.id = ContainerIds.CHANCES;
 
-        return chancesSpan;
-    }
-
-    const chancesSpan = document.getElementById('chances') as HTMLSpanElement;
+    const chancesSpan = document.createElement('span');
+    chancesSpan.id = 'chances';
     chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
+    chancesContainer.appendChild(chancesSpan);
+
+    const container = document.getElementById(ContainerIds.GAME);
+    container?.appendChild(chancesContainer);
 
     return chancesSpan;
 }
