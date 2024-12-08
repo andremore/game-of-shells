@@ -57,8 +57,6 @@ const extractCurrentTranslateX = (element: HTMLElement): number => {
         return 0;
     }
 
-    console.log(transform);
-
     const matrix = new DOMMatrix(transform);
     return matrix.m41;
 };
@@ -113,7 +111,6 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
             setTimeout(() => performShuffle(shuffleIndex + 1), settingsStore.speed);
         } else {
             setTimeout(() => {
-                console.log('swap');
                 setIsGameOngoing(false);
                 callbacksToRunAfterShuffle();
             }, settingsStore.speed);
