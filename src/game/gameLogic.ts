@@ -29,19 +29,11 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     element.style.cursor = 'auto';
 }
 
-export function resetGame(btnSettings?: HTMLButtonElement, btnRestart?: HTMLButtonElement) {
+export function restartGame(addStartGameBtn = false) {
     document.getElementById(ContainerIds.SHELL)?.remove();
     document.getElementById(ContainerIds.CHANCES)?.remove();
 
-    if (btnSettings && btnRestart) {
-        btnSettings.style.display = 'block';
-        btnRestart.style.display = 'none';
-    }
-
-    if (
-        !document.getElementById(ContainerIds.START_GAME)
-        && !document.getElementById('post-game-msg')
-    ) {
+    if (addStartGameBtn) {
         const gameContainer = document.getElementById(ContainerIds.GAME);
         gameContainer?.appendChild(BtnStartGame());
     }
@@ -51,7 +43,7 @@ export function resetGame(btnSettings?: HTMLButtonElement, btnRestart?: HTMLButt
 
 export function endGame(userWon: boolean): void {
     PostGame(userWon);
-    resetGame();
+    restartGame();
 }
 
 export function showBallInShellTemporarily(): Promise<void> {

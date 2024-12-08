@@ -4,7 +4,7 @@ import { Button } from "./Button";
 export function BtnRestart() {
   return Button({
     id: 'btn-restart',
-    textContent: '↺ Restart',
+    textContent: '↺',
     type: ButtonType.BUTTON,
   });
 };

@@ -4,7 +4,7 @@ import { Button } from "./Button";
 export function BtnSettings() {
   return Button({
     id: 'btn-settings',
-    textContent: '⚙ Settings',
+    textContent: '⚙',
     type: ButtonType.BUTTON,
   });
 };
