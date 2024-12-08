@@ -19,6 +19,16 @@ export function createChances(): HTMLSpanElement | null {
     return chancesSpan;
 }
 
+// TODO: Remove after completion, this is for debugging purposes
+function getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 export function createShells(chancesSpan: HTMLSpanElement | null): void {
     const gameContainer = document.getElementById(ContainerIds.GAME);
     let shellContainer = document.getElementById(ContainerIds.SHELL);
@@ -32,6 +42,7 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
     for (let i = 0; i < settingsStore.shellNumber; i++) {
         const shell = document.createElement('div');
         shell.classList.add('shell');
+        shell.style.backgroundColor = getRandomColor();
 
         const hat = document.createElement('img');
         hat.src = '/public/hat.svg'; 
@@ -63,21 +74,22 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
 
     const childrenArray = Array.from(shellContainer.children) as HTMLDivElement[];
 
-    const performShuffle = (index: number): void => {
-        for (let i = childrenArray.length - 1; i > 0; i--) {
-            const randomIndex = Math.floor(Math.random() * (i + 1));
+    const performShuffle = (shuffleIndex: number): void => {
+        const firstRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
+        let secondRandomShellIndex: number;
 
-            let currentChild = childrenArray[i];
-            let randomChild = childrenArray[randomIndex];
+        do {
+            secondRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
+        } while (secondRandomShellIndex === firstRandomShellIndex);
 
-            childrenArray[i] = randomChild;
-            childrenArray[randomIndex] = currentChild;
-        }
+        const firstShellElement = childrenArray[firstRandomShellIndex];
+        childrenArray[firstRandomShellIndex] = childrenArray[secondRandomShellIndex];
+        childrenArray[secondRandomShellIndex] = firstShellElement;
 
         childrenArray.forEach(child => shellContainer.appendChild(child));
 
-        if (index < settingsStore.shuffleNumber - 1) {
-            setTimeout(() => performShuffle(index + 1), settingsStore.speed);
+        if (shuffleIndex < settingsStore.shuffleNumber - 1) {
+            setTimeout(() => performShuffle(shuffleIndex + 1), settingsStore.speed);
         } else {
             setIsGameOngoing(false);
             callbacksToRunAfterShuffle();
