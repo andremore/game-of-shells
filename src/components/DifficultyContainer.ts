@@ -11,6 +11,7 @@ export function DifficultyContainer(updateModalInputs: () => void, currentDiffic
   Object.keys(settingsMap).forEach(difficulty => {
     const classNames = ['difficulty'];
 
+    // FIXME: Duplicated code
     if (currentDifficulty === difficulty) {
       const previousSelectedDifficultyEl = document.querySelector('.selected-difficulty');
 
@@ -25,6 +26,7 @@ export function DifficultyContainer(updateModalInputs: () => void, currentDiffic
       difficulty: difficulty as Difficulty,
       classNames,
       onClick: () => {
+        // FIXME: Duplicated code
         const previousSelectedDifficultyEl = document.querySelector('.selected-difficulty');
 
         if (previousSelectedDifficultyEl != null) {

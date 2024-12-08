@@ -1,6 +1,6 @@
 import { ContainerIds } from "../types/enums";
 import { settingsStore } from "../stores/settingsStore";
-import { gameStore } from "../stores/gameStore";
+import { gameStore, setIsGameOngoing } from "../stores/gameStore";
 import { shellClickHandler } from "./gameLogic";
 
 // FIXME: Move this to its own component
@@ -52,7 +52,7 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
     container?.appendChild(shellContainer);
 }
 
-export function shuffleShells(): void {
+export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     const shellContainer = document.getElementById(ContainerIds.SHELL);
 
     if (!shellContainer) {
@@ -76,6 +76,9 @@ export function shuffleShells(): void {
 
         if (index < settingsStore.shuffleNumber - 1) {
             setTimeout(() => performShuffle(index + 1), settingsStore.speed);
+        } else {
+            setIsGameOngoing(false);
+            callbacksToRunAfterShuffle();
         }
     }
 

@@ -4,8 +4,13 @@ import { settingsStore } from "./settingsStore";
 export const gameStore: GameStore = {
     shells: [],
     ballIndex: null,
-    chances: settingsStore.chances
+    chances: settingsStore.chances,
+    isGameOngoing: false
 };
+
+export function setIsGameOngoing(isShuffling: boolean) {
+    gameStore.isGameOngoing = isShuffling;
+}
 
 export function setChances(chances: number) {
     gameStore.chances = chances;
