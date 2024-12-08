@@ -103,24 +103,36 @@ button:focus-visible {
 }
 
 .shell {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 5em;
   height: 5em;
-  /* TODO: Readd the color after completion */
-  /* background-color: #f9f9f9; */
   border-radius: 50%;
   cursor: pointer;
 }
 
 .shell:hover {
-  background-color: #747bff;
+  background-color: rgba(80, 80, 100, 1);
   transition: background-color 250ms;
 }
 
+.hat {
+  width: 5em;
+  margin-left: 11%;
+  z-index: 3;
+}
+
+.line {
+  position: relative;
+  left: -65%;
+  top: 105%;
+  width: 3em;
+  filter: invert(1) saturate(0);
+}
+
 #ball {
-  background-color: red;
   width: 2.5em;
   height: 2.5em;
   border-radius: 50%;
@@ -164,7 +176,7 @@ button:focus-visible {
   gap: 1em;
 }
 
-.modal-content .modal-difficulty-container > button {
+.modal-content .modal-difficulty-container>button {
   font-size: 1.2rem;
   background-color: transparent;
   font-weight: normal;
