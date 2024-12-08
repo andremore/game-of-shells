@@ -29,7 +29,6 @@ function main() {
     btnRestart.disabled = true;
   });
   
-  
   header?.appendChild(btnSettings);
   header?.appendChild(btnRestart);
   root?.appendChild(header);

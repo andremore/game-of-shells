@@ -10,6 +10,9 @@ export function startGame(): void {
     const btnRestart = document.getElementById('btn-restart') as HTMLButtonElement;
     btnRestart.disabled = true;
 
+    const btnSettings = document.getElementById('btn-settings') as HTMLButtonElement;
+    btnSettings.disabled = true;
+
     let chancesSpan: HTMLSpanElement | null = null;
     if (settingsStore.chances > 1) {
         chancesSpan = createChances();
@@ -24,6 +27,7 @@ export function startGame(): void {
             setShellsClickHandlers(chancesSpan);
 
             btnRestart.disabled = false;
+            btnSettings.disabled = false;
         });
     });
 }
