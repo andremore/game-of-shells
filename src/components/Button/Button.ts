@@ -8,6 +8,7 @@ type Button = {
     onClick?: (() => void) | null
 }
 
+// Single reusable component for buttons to avoid creating so many buttons individually
 export function Button({
     textContent,
     type,
