@@ -11,6 +11,7 @@ import './main.css';
 import './styles/header.css';
 
 function main() {
+  // Header and its elements
   const header = document.createElement('header');
 
   const btnSettings = BtnSettings();
@@ -53,6 +54,7 @@ function main() {
   header?.appendChild(btnContainer);
   root?.appendChild(header);
 
+  // Creates the main component to attach the GameContainer which has the relevant start game logic
   const main = document.createElement('main');
   main?.appendChild(GameContainer());
 

@@ -1,9 +1,12 @@
+import { Chances } from "../components/Chances";
+import { Shells } from "../components/Shells";
 import { setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
-import { showBallInShellTemporarily } from "./gameLogic";
-import { createChances, createShells, shuffleShells } from "./gameUI";
+import { showBallInShellTemporarily, } from "./gameLogic";
+import { startShuffling } from "./shuffleShells";
 
+// Responsible for starting the game loop when the user clicks either the start or the play again button
 export function startGame(): void {
     destroyGameIrrelevantElements();
 
@@ -15,15 +18,16 @@ export function startGame(): void {
 
     let chancesSpan: HTMLSpanElement | null = null;
     if (settingsStore.chances > 1) {
-        chancesSpan = createChances();
+        chancesSpan = Chances();
     }
 
-    createShells(chancesSpan);
+    Shells(chancesSpan);
     setBallIndex();
-
     setIsGameOngoing(true);
+
+    // After the ball is shown temporarily we shuffle the shells and proceed to add the click handler accordingly
     showBallInShellTemporarily().then(() => {
-        shuffleShells(() => {
+        startShuffling(() => {
             setShellsClickHandlers(chancesSpan);
 
             const hats = document.querySelectorAll<HTMLImageElement>('.hat');

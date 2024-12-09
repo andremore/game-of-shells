@@ -1,12 +1,14 @@
 import { SettingsStoreKeys } from "../types/enums";
-import { ModalInputNumber } from "./InputNumber";
+import { ModalInputNumber } from "./ModalInputNumber";
 
 export function SettingsModal() {
+    // Backdrop overlay
     const overlay = document.createElement('div');
     overlay.id = 'modal-overlay';
     overlay.classList.add('overlay');
     document.body.appendChild(overlay);
 
+    // Modal
     const modalDialog = document.createElement('dialog');
     modalDialog.id = 'settings-modal';
     modalDialog.classList.add('modal');
@@ -18,6 +20,7 @@ export function SettingsModal() {
     modalTitle.textContent = 'Game Settings';
     modalContent.appendChild(modalTitle);
 
+    // Difficulty related
     const difficultyPresetsContainer = document.createElement('div');
     difficultyPresetsContainer.id = 'difficulty-presets-container';
 
@@ -27,6 +30,7 @@ export function SettingsModal() {
     difficultyPresetsContainer.appendChild(difficultyPresetsTitle);
     modalContent.appendChild(difficultyPresetsContainer);
 
+    // Form and inputs
     const form = document.createElement('form');
     form.id = 'modal-input-container';
 
@@ -36,6 +40,7 @@ export function SettingsModal() {
 
     modalContent.appendChild(form);
 
+    // Cancel and apply buttons
     const actionsContainer = document.createElement('div');
     actionsContainer.id = 'actions-container';
 

@@ -8,6 +8,7 @@ import { maxValues } from "../utils/constants";
 import '../styles/modal.css';
 
 export function SettingsController() {
+    // Current settings store state copy
     const currentSettingsStoreVals = JSON.parse(JSON.stringify(settingsStore));
 
     const {
@@ -17,6 +18,7 @@ export function SettingsController() {
         cancelButton
     } = SettingsModal();
 
+    // Updates input values based on difficulty
     function updateModalInputs() {
         const inputs = form.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
         inputs.forEach(input => {
@@ -45,6 +47,7 @@ export function SettingsController() {
 
     modalDialog.showModal();
 
+    // We had to add this to make sure the cancel handler runs when the escape key is pressed
     const escapeKeyListener = (event: KeyboardEvent) => {
         if (event.key === 'Escape' && modalDialog.open) {
             handleCancel(currentSettingsStoreVals, modalDialog);

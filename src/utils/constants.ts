@@ -12,7 +12,7 @@ export const easySettings: SettingsStore = {
 
 export const normalSettings: SettingsStore = {
     shellNumber: 3,
-    shuffleNumber: 3,
+    shuffleNumber: 5,
     speed: Speed.NORMAL,
     chances: 1,
     displayBallTTl: 1000,
@@ -20,8 +20,8 @@ export const normalSettings: SettingsStore = {
 }
 
 export const hardSettings: SettingsStore = {
-    shellNumber: 4,
-    shuffleNumber: 3,
+    shellNumber: 5,
+    shuffleNumber: 10,
     speed: Speed.FAST,
     chances: 1,
     displayBallTTl: 750,
