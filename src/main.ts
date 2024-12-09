@@ -34,11 +34,18 @@ function main() {
   btnContainer.appendChild(btnSettings);
   btnContainer.appendChild(btnRestart);
 
+  const logo = document.createElement('img');
+  logo.src = '/hat.svg';
+
   const title = document.createElement('h1');
   title.textContent = 'Game of Santas';
-  title.id = 'title';
+
+  const logoTitleContainer = document.createElement('div');
+  logoTitleContainer.id = 'logo-title-container';
+  logoTitleContainer.appendChild(logo);
+  logoTitleContainer.appendChild(title);
   
-  header?.appendChild(title);
+  header?.appendChild(logoTitleContainer);
   header?.appendChild(btnContainer);
   root?.appendChild(header);
 

@@ -3,9 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,22 +11,40 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
-  /* display: flex; */
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #fff3b4, #e04c4d);
+  background-size: 300% 300%;
+  animation: backgroundAnimation 20s ease infinite;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.05rem, transparent 0.25rem);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 h1 {
@@ -48,18 +64,57 @@ h1 {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2em;
   z-index: 1;
+  margin: 2em;
+  border-radius: 1em;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 50px 22px -35px rgba(0, 0, 0, 0.1);
 }
 
-header,
-h1 {
+#logo-title-container {
+ display: flex;
+ gap: 2em;
+}
+
+#logo-title-container > img {
+  height: 5em;
+}
+
+#logo-title-container > h1 {
   margin: 0;
+  color: #f0f3fe;
 }
 
 #btn-container {
   display: flex;
   gap: 2em;
+}
+
+button {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  transition: background-color 250ms;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: background-color 250ms;
+}
+
+button:disabled {
+  background-color: transparent;
+}
+
+#start-game {
+  font-weight: bold;
+  box-shadow: 0px 30px 25px -30px rgba(0, 0, 0, 1);
 }
 
 main {
@@ -69,43 +124,6 @@ main {
   flex-grow: 1;
   justify-content: center;
   margin-top: -5%;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 2em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  z-index: 10;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 #shell-container {
@@ -136,11 +154,25 @@ button:focus-visible {
 }
 
 @keyframes jiggle {
-  0% { transform: rotate(0); }
-  25% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0); }
+  0% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
 }
 
 #ball {
