@@ -4,6 +4,7 @@ import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
 import { showBallInShellTemporarily } from "./gameLogic";
 import { createChances, createShells, shuffleShells } from "./gameUI";
 
+// Responsible for starting the game loop when the user clicks either the start or the play again button
 export function startGame(): void {
     destroyGameIrrelevantElements();
 
@@ -20,8 +21,9 @@ export function startGame(): void {
 
     createShells(chancesSpan);
     setBallIndex();
-
     setIsGameOngoing(true);
+
+    // After the ball is shown temporarily we shuffle the shells and proceed to add the click handler accordingly
     showBallInShellTemporarily().then(() => {
         shuffleShells(() => {
             setShellsClickHandlers(chancesSpan);
