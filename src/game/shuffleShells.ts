@@ -30,8 +30,61 @@ function calculateNewTranslateXValues(
     }
 }
 
+// Recursive function that runs based on the shuffleNumber set
+function shuffle(
+    shuffleIndex: number,
+    childrenArray: HTMLDivElement[],
+    virtualPositions: VirtualPositions,
+    callbacksToRunAfterShuffle: () => void
+) {
+    // we select two random shells ensuring the second isn't the same index 
+    const firstRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
+    let secondRandomShellIndex: number;
+
+    do {
+        secondRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
+    } while (secondRandomShellIndex === firstRandomShellIndex);
+
+    const firstShellElement = childrenArray[firstRandomShellIndex];
+    const secondShellElement = childrenArray[secondRandomShellIndex];
+
+    const firstShellPosition = virtualPositions[firstRandomShellIndex];
+    const secondShellPosition = virtualPositions[secondRandomShellIndex];
+
+    const {
+        newTranslateXFirst,
+        newTranslateXSecond
+    } = calculateNewTranslateXValues(
+        firstShellElement,
+        secondShellElement,
+        firstShellPosition,
+        secondShellPosition
+    )
+
+    firstShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
+    secondShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
+
+    firstShellElement.style.transform = `translateX(${newTranslateXFirst}px)`;
+    secondShellElement.style.transform = `translateX(${newTranslateXSecond}px)`;
+
+    // Store the new swapped positions
+    virtualPositions[firstRandomShellIndex] = secondShellPosition;
+    virtualPositions[secondRandomShellIndex] = firstShellPosition;
+
+    if (shuffleIndex < settingsStore.shuffleNumber - 1) {
+        setTimeout(() => {
+            shuffle(shuffleIndex + 1, childrenArray, virtualPositions, callbacksToRunAfterShuffle)
+        }, settingsStore.speed);
+    } else {
+        setTimeout(() => {
+            setIsGameOngoing(false);
+            callbacksToRunAfterShuffle();
+        }, settingsStore.speed);
+    }
+}
+
 // Responsible for shuffling shells making use of translateX and DOMMatrix
-export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
+export function startShuffling(callbacksToRunAfterShuffle: () => void): void {
     const virtualPositions: VirtualPositions = {};
     const shellContainer = document.getElementById(Ids.SHELL);
 
@@ -46,51 +99,5 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
         virtualPositions[index] = child.getBoundingClientRect().left;
     });
 
-    // Recursive function that runs based on the shuffleNumber set
-    const performShuffle = (shuffleIndex: number): void => {
-        // we select two random shells ensuring the second isn't the same index 
-        const firstRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
-        let secondRandomShellIndex: number;
-
-        do {
-            secondRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
-        } while (secondRandomShellIndex === firstRandomShellIndex);
-
-        const firstShellElement = childrenArray[firstRandomShellIndex];
-        const secondShellElement = childrenArray[secondRandomShellIndex];
-
-        const firstShellPosition = virtualPositions[firstRandomShellIndex];
-        const secondShellPosition = virtualPositions[secondRandomShellIndex];
-
-        const {
-            newTranslateXFirst,
-            newTranslateXSecond
-        } = calculateNewTranslateXValues(
-            firstShellElement,
-            secondShellElement,
-            firstShellPosition,
-            secondShellPosition
-        )
-
-        firstShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
-        secondShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
-
-        firstShellElement.style.transform = `translateX(${newTranslateXFirst}px)`;
-        secondShellElement.style.transform = `translateX(${newTranslateXSecond}px)`;
-
-        // Store the new swapped positions
-        virtualPositions[firstRandomShellIndex] = secondShellPosition;
-        virtualPositions[secondRandomShellIndex] = firstShellPosition;
-
-        if (shuffleIndex < settingsStore.shuffleNumber - 1) {
-            setTimeout(() => performShuffle(shuffleIndex + 1), settingsStore.speed);
-        } else {
-            setTimeout(() => {
-                setIsGameOngoing(false);
-                callbacksToRunAfterShuffle();
-            }, settingsStore.speed);
-        }
-    }
-
-    performShuffle(0);
+    shuffle(0, childrenArray, virtualPositions, callbacksToRunAfterShuffle);
 }
