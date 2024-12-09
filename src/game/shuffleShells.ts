@@ -1,42 +1,36 @@
-import { Ids } from "../types/enums";
+import { setIsGameOngoing } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
-import { gameStore, setIsGameOngoing } from "../stores/gameStore";
-import { guessHandler } from "./gameLogic";
+import { Ids } from "../types/enums";
 import { VirtualPositions } from "../types/types";
-
-import '../styles/game.css';
 import { extractCurrentTranslateX } from "../utils/extractCurrentTranslateX";
 
-export function createShells(chancesSpan: HTMLSpanElement | null): void {
-    const gameContainer = document.getElementById(Ids.GAME);
-    let shellContainer = document.getElementById(Ids.SHELL);
+import '../styles/game.css';
 
-    if (!shellContainer) {
-        shellContainer = document.createElement('div');
+function calculateNewTranslateXValues(
+    firstShellElement: HTMLDivElement,
+    secondShellElement: HTMLDivElement,
+    firstShellPosition: number,
+    secondShellPosition: number,
+) {
+    // Calculates the distance between each shell
+    const distanceToMoveFirst = secondShellPosition - firstShellPosition;
+    const distanceToMoveSecond = -distanceToMoveFirst;
+
+    // Gets the actual current translateX after multiple transforms
+    const currentTranslateXFirst = extractCurrentTranslateX(firstShellElement);
+    const currentTranslateXSecond = extractCurrentTranslateX(secondShellElement);
+
+    // Final values
+    const newTranslateXFirst = currentTranslateXFirst + distanceToMoveFirst;
+    const newTranslateXSecond = currentTranslateXSecond + distanceToMoveSecond;
+
+    return {
+        newTranslateXFirst,
+        newTranslateXSecond
     }
-
-    shellContainer.id = Ids.SHELL;
-
-    for (let i = 0; i < settingsStore.shellNumber; i++) {
-        const shell = document.createElement('div');
-        shell.classList.add('shell');
-
-        const hat = document.createElement('img');
-        hat.src = '/hat.svg';
-        hat.classList.add('hat');
-        shell.appendChild(hat);
-
-        shellContainer.appendChild(shell);
-        gameStore.shells.push({
-            element: shell,
-            listener: () => guessHandler(i, chancesSpan),
-            handlerFn: () => null
-        });
-    }
-
-    gameContainer?.appendChild(shellContainer);
 }
 
+// Responsible for shuffling shells making use of translateX and DOMMatrix
 export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     const virtualPositions: VirtualPositions = {};
     const shellContainer = document.getElementById(Ids.SHELL);
@@ -47,11 +41,14 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
 
     const childrenArray = Array.from(shellContainer.children) as HTMLDivElement[];
 
+    // Store the initial positions of the shells
     childrenArray.forEach((child, index) => {
         virtualPositions[index] = child.getBoundingClientRect().left;
     });
 
+    // Recursive function that runs based on the shuffleNumber set
     const performShuffle = (shuffleIndex: number): void => {
+        // we select two random shells ensuring the second isn't the same index 
         const firstRandomShellIndex = Math.floor(Math.random() * childrenArray.length);
         let secondRandomShellIndex: number;
 
@@ -65,14 +62,15 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
         const firstShellPosition = virtualPositions[firstRandomShellIndex];
         const secondShellPosition = virtualPositions[secondRandomShellIndex];
 
-        const distanceToMoveFirst = secondShellPosition - firstShellPosition;
-        const distanceToMoveSecond = -distanceToMoveFirst;
-
-        const currentTranslateXFirst = extractCurrentTranslateX(firstShellElement);
-        const currentTranslateXSecond = extractCurrentTranslateX(secondShellElement);
-
-        const newTranslateXFirst = currentTranslateXFirst + distanceToMoveFirst;
-        const newTranslateXSecond = currentTranslateXSecond + distanceToMoveSecond;
+        const {
+            newTranslateXFirst,
+            newTranslateXSecond
+        } = calculateNewTranslateXValues(
+            firstShellElement,
+            secondShellElement,
+            firstShellPosition,
+            secondShellPosition
+        )
 
         firstShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
         secondShellElement.style.transition = `transform ${settingsStore.speed}ms ease-in-out`;
@@ -80,6 +78,7 @@ export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
         firstShellElement.style.transform = `translateX(${newTranslateXFirst}px)`;
         secondShellElement.style.transform = `translateX(${newTranslateXSecond}px)`;
 
+        // Store the new swapped positions
         virtualPositions[firstRandomShellIndex] = secondShellPosition;
         virtualPositions[secondRandomShellIndex] = firstShellPosition;
 

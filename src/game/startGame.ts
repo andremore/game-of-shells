@@ -4,7 +4,7 @@ import { setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../store
 import { settingsStore } from "../stores/settingsStore";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
 import { showBallInShellTemporarily, } from "./gameLogic";
-import { shuffleShells } from "./gameUI";
+import { shuffleShells } from "./shuffleShells";
 
 // Responsible for starting the game loop when the user clicks either the start or the play again button
 export function startGame(): void {

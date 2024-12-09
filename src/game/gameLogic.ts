@@ -81,4 +81,5 @@ export function showBallInShellTemporarily(): Promise<void> {
             }, settingsStore.displayBallTTl);
         }, 250);
     });
-}
+};
+
