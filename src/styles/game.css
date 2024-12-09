@@ -25,12 +25,6 @@
   margin-bottom: 0.1em;
 }
 
-#start-game-santa {
-  position: absolute;
-  top: 22.5em;
-  width: 12em;
-}
-
 #shell-container {
   display: flex;
   justify-content: space-evenly;
