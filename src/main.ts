@@ -28,19 +28,23 @@ function main() {
     document.getElementById('post-game-btn')?.remove();
     btnRestart.disabled = true;
   });
-  
-  header?.appendChild(btnSettings);
-  header?.appendChild(btnRestart);
-  root?.appendChild(header);
 
-  const main = document.createElement('main');
+  const btnContainer = document.createElement('div');
+  btnContainer.id = 'btn-container';
+  btnContainer.appendChild(btnSettings);
+  btnContainer.appendChild(btnRestart);
 
   const title = document.createElement('h1');
   title.textContent = 'Game of Santas';
   title.id = 'title';
+  
+  header?.appendChild(title);
+  header?.appendChild(btnContainer);
+  root?.appendChild(header);
 
-  main?.appendChild(title);
+  const main = document.createElement('main');
   main?.appendChild(GameContainer());
+
   root?.appendChild(main);
 }
 

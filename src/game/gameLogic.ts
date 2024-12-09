@@ -1,6 +1,7 @@
 import { BtnStartGame } from "../components/Button/BtnStartGame";
 import { PostGame } from "../components/PostGame";
 import { gameStore, resetGameState } from "../stores/gameStore";
+import { settingsStore } from "../stores/settingsStore";
 import { ContainerIds } from "../types/enums";
 
 export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | null): void {
@@ -60,13 +61,13 @@ export function showBallInShellTemporarily(): Promise<void> {
     return new Promise<void>((resolve) => {
         setTimeout(() => {
             shellToAddBall.appendChild(ball);
-            shellToAddBall.style.transform = 'translateY(-50px)';
+            shellToAddBall.style.transform = 'translateY(-50%)';
 
             setTimeout(() => {
                 ball.remove();
                 shellToAddBall.style.transform = '';
                 resolve();
-            }, 1500);
+            }, settingsStore.displayBallTTl);
         }, 250);
     });
 }

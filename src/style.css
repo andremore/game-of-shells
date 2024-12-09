@@ -47,7 +47,19 @@ h1 {
 
 header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  padding: 2em;
+  z-index: 1;
+}
+
+header,
+h1 {
+  margin: 0;
+}
+
+#btn-container {
+  display: flex;
+  gap: 2em;
 }
 
 main {
@@ -99,7 +111,7 @@ button:focus-visible {
 #shell-container {
   display: flex;
   justify-content: space-evenly;
-  gap: 4em;
+  gap: 10em;
 }
 
 .shell {
@@ -113,23 +125,30 @@ button:focus-visible {
   cursor: pointer;
 }
 
-.shell:hover {
-  background-color: rgba(80, 80, 100, 1);
-  transition: background-color 250ms;
-}
-
 .hat {
   position: absolute;
-  width: 5em;
+  width: 10em;
   z-index: 3;
+}
+
+.hat[data-jiggle='true']:hover {
+  animation: jiggle 0.5s ease-in-out infinite;
+}
+
+@keyframes jiggle {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0); }
 }
 
 #ball {
   position: absolute;
-  top: 105%;
-  left: 18%;
-  width: 2.5em;
-  height: 2.5em;
+  top: 80%;
+  left: -10%;
+  width: 5em;
+  height: 5em;
   border-radius: 50%;
 }
 

@@ -26,6 +26,13 @@ export function startGame(): void {
         shuffleShells(() => {
             setShellsClickHandlers(chancesSpan);
 
+            const hats = document.querySelectorAll<HTMLImageElement>('.hat');
+
+            let i = 0;
+            for (; i < hats.length; i++) {
+                hats[i].dataset.jiggle = 'true';
+            }
+
             btnRestart.disabled = false;
             btnSettings.disabled = false;
         });
