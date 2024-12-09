@@ -1,12 +1,12 @@
 import { setSettingsBasedOnPresets } from "../stores/settingsStore";
-import { ContainerIds, Difficulty } from "../types/enums";
+import { Ids, Difficulty } from "../types/enums";
 import { settingsMap } from "../utils/constants";
 import { BtnDifficulty } from "./Button/BtnDifficulty";
 
 export function DifficultyContainer(updateModalInputs: () => void, currentDifficulty: Difficulty) {
   const difficultyContainer = document.createElement('div');
-  difficultyContainer.id = ContainerIds.DIFFICULTY;
-  difficultyContainer.classList.add(`modal-${ContainerIds.DIFFICULTY}`);
+  difficultyContainer.id = Ids.DIFFICULTY;
+  difficultyContainer.classList.add(`modal-${Ids.DIFFICULTY}`);
 
   Object.keys(settingsMap).forEach(difficulty => {
     const classNames = ['difficulty'];

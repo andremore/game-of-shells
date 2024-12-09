@@ -1,7 +1,8 @@
-import { BtnStartGame } from "../components/Button/BtnStartGame";
+import { GameContainer } from "../components/GameContainer";
 import { PostGame } from "../components/PostGame";
 import { gameStore, resetGameState } from "../stores/gameStore";
-import { ContainerIds } from "../types/enums";
+import { settingsStore } from "../stores/settingsStore";
+import { Ids } from "../types/enums";
 
 export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | null): void {
     const isCorrectShell = index === gameStore.ballIndex;
@@ -30,12 +31,14 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
 }
 
 export function restartGame(addStartGameBtn = false) {
-    document.getElementById(ContainerIds.SHELL)?.remove();
-    document.getElementById(ContainerIds.CHANCES)?.remove();
+    document.getElementById(Ids.SHELL)?.remove();
+    document.getElementById(Ids.CHANCES)?.remove();
 
     if (addStartGameBtn) {
-        const gameContainer = document.getElementById(ContainerIds.GAME);
-        gameContainer?.appendChild(BtnStartGame());
+        document.getElementById(Ids.GAME)?.remove();
+
+        const mainContainer = document.getElementsByTagName('main')[0];
+        mainContainer?.appendChild(GameContainer());
     }
 
     resetGameState();
@@ -60,13 +63,13 @@ export function showBallInShellTemporarily(): Promise<void> {
     return new Promise<void>((resolve) => {
         setTimeout(() => {
             shellToAddBall.appendChild(ball);
-            shellToAddBall.style.transform = 'translateY(-50px)';
+            shellToAddBall.style.transform = 'translateY(-50%)';
 
             setTimeout(() => {
                 ball.remove();
                 shellToAddBall.style.transform = '';
                 resolve();
-            }, 1500);
+            }, settingsStore.displayBallTTl);
         }, 250);
     });
 }

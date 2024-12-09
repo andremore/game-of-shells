@@ -1,11 +1,14 @@
 import { BtnSettings } from './components/Button/BtnSettings';
 import { GameContainer } from './components/GameContainer';
 import { root } from './utils/constants';
-import './style.css';
 import { SettingsController } from './controllers/SettingsController';
 import { BtnRestart } from './components/Button/BtnRestart';
 import { gameStore } from './stores/gameStore';
 import { restartGame } from './game/gameLogic';
+import { Ids } from './types/enums';
+
+import './main.css';
+import './styles/header.css';
 
 function main() {
   const header = document.createElement('header');
@@ -24,23 +27,35 @@ function main() {
 
     restartGame(true);
 
-    document.getElementById('post-game-msg')?.remove();
-    document.getElementById('post-game-btn')?.remove();
+    document.getElementById(Ids.POST_GAME_MSG)?.remove();
+    document.getElementById(Ids.POST_GAME_BTN)?.remove();
+    document.getElementById(Ids.POST_GAME_IMG)?.remove();
     btnRestart.disabled = true;
   });
-  
-  header?.appendChild(btnSettings);
-  header?.appendChild(btnRestart);
-  root?.appendChild(header);
 
-  const main = document.createElement('main');
+  const btnContainer = document.createElement('div');
+  btnContainer.id = 'btn-container';
+  btnContainer.appendChild(btnSettings);
+  btnContainer.appendChild(btnRestart);
+
+  const logo = document.createElement('img');
+  logo.src = '/hat.svg';
 
   const title = document.createElement('h1');
   title.textContent = 'Game of Santas';
-  title.id = 'title';
 
-  main?.appendChild(title);
+  const logoTitleContainer = document.createElement('div');
+  logoTitleContainer.id = 'logo-title-container';
+  logoTitleContainer.appendChild(logo);
+  logoTitleContainer.appendChild(title);
+
+  header?.appendChild(logoTitleContainer);
+  header?.appendChild(btnContainer);
+  root?.appendChild(header);
+
+  const main = document.createElement('main');
   main?.appendChild(GameContainer());
+
   root?.appendChild(main);
 }
 

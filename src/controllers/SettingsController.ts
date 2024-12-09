@@ -4,6 +4,8 @@ import { handleCancel, handleSubmit } from "../utils/settingsFormHandlers";
 import { DifficultyContainer } from "../components/DifficultyContainer";
 import { SettingsModal } from "../components/SettingsModal";
 
+import '../styles/modal.css';
+
 export function SettingsController() {
     const currentSettingsStoreVals = JSON.parse(JSON.stringify(settingsStore));
 

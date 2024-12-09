@@ -17,7 +17,6 @@ export enum Difficulty {
     EASY = 'easy',
     NORMAL = 'normal',
     HARD = 'hard',
-    HARDCORE = 'hardcore',
     CUSTOM = 'custom'
 }
 
@@ -33,12 +32,20 @@ export enum Mode {
     ROGUELIKE = 'roguelike'
 }
 
-export enum ContainerIds {
-    START_GAME = 'start-game',
+export enum Ids {
+    BTN_START_GAME = 'btn-start-game',
+    START_GAME_SANTA = 'start-game-santa',
+    POST_GAME_MSG = 'msg-post-game',
+    POST_GAME_BTN = 'btn-post-game',
+    POST_GAME_IMG = 'img-post-game',
     GAME = 'game-container',
     SHELL = 'shell-container',
     CHANCES = 'chances-container',
     DIFFICULTY = 'difficulty-container'
+}
+
+export enum Classes {
+    POST_GAME = '.post-game',
 }
 
 export enum ButtonType {

@@ -1,4 +1,4 @@
-import { ContainerIds, Difficulty, Mode, SettingsStoreKeys, Speed } from "../types/enums";
+import { Ids, Difficulty, Mode, SettingsStoreKeys, Speed, Classes } from "../types/enums";
 import { SettingsStore } from "../types/types";
 
 export const easySettings: SettingsStore = {
@@ -31,21 +31,11 @@ export const hardSettings: SettingsStore = {
     difficulty: Difficulty.HARD
 }
 
-export const hardcoreSettings: SettingsStore = {
-    shellNumber: 6,
-    shuffleNumber: 5,
-    speed: Speed.HARDCORE,
-    chances: 1,
-    mode: Mode.DEFAULT,
-    displayBallTTl: 250,
-    difficulty: Difficulty.HARDCORE
-}
-
 export const settingsMap = {
     [Difficulty.EASY]: easySettings,
     [Difficulty.NORMAL]: normalSettings,
     [Difficulty.HARD]: hardSettings,
-    [Difficulty.HARDCORE]: hardcoreSettings
+    [Difficulty.CUSTOM]: normalSettings,
 }
 
 export const settingsInputsMap = {
@@ -54,7 +44,7 @@ export const settingsInputsMap = {
         key: 'chances'
     },
     [SettingsStoreKeys.SHELL_NUMBER]: {
-        label: 'Shells:',
+        label: 'Santas:',
         key: 'shellNumber'
     },
     [SettingsStoreKeys.SHUFFLE_NUMBER]: {
@@ -73,6 +63,5 @@ export const settingsInputsMap = {
 
 export const root = document.querySelector<HTMLDivElement>('#app');
 
-// FIXME:
-export const gameIrrelevantElementIds = ['start-game', ContainerIds.DIFFICULTY];
-export const gameIrrelevantClassNames = ['.post-game'];
+export const gameIrrelevantElementIds = [Ids.BTN_START_GAME, Ids.START_GAME_SANTA, Ids.POST_GAME_BTN, Ids.POST_GAME_MSG, Ids.POST_GAME_IMG];
+export const gameIrrelevantClassNames = [Classes.POST_GAME];
