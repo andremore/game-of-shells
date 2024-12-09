@@ -1,4 +1,4 @@
-import { ContainerIds, Difficulty, Mode, SettingsStoreKeys, Speed } from "../types/enums";
+import { Ids, Difficulty, Mode, SettingsStoreKeys, Speed } from "../types/enums";
 import { SettingsStore } from "../types/types";
 
 export const easySettings: SettingsStore = {
@@ -74,5 +74,5 @@ export const settingsInputsMap = {
 export const root = document.querySelector<HTMLDivElement>('#app');
 
 // FIXME:
-export const gameIrrelevantElementIds = ['start-game', ContainerIds.DIFFICULTY];
+export const gameIrrelevantElementIds = [Ids.BTN_START_GAME, Ids.START_GAME_SANTA];
 export const gameIrrelevantClassNames = ['.post-game'];

@@ -33,8 +33,9 @@ export enum Mode {
     ROGUELIKE = 'roguelike'
 }
 
-export enum ContainerIds {
-    START_GAME = 'start-game',
+export enum Ids {
+    BTN_START_GAME = 'btn-start-game',
+    START_GAME_SANTA = 'start-game-santa',
     GAME = 'game-container',
     SHELL = 'shell-container',
     CHANCES = 'chances-container',

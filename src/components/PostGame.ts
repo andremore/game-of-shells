@@ -1,8 +1,8 @@
 import { startGame } from "../game/startGame";
-import { ContainerIds } from "../types/enums";
+import { Ids } from "../types/enums";
 
 export function PostGame(userWon: boolean) {
-    const gameContainer = document.getElementById(ContainerIds.GAME);
+    const gameContainer = document.getElementById(Ids.GAME);
 
     const message = document.createElement('h2');
     message.id = 'post-game-msg';

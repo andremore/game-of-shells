@@ -1,34 +1,33 @@
-import { ContainerIds } from "../types/enums";
+import { Ids } from "../types/enums";
 import { settingsStore } from "../stores/settingsStore";
 import { gameStore, setIsGameOngoing } from "../stores/gameStore";
 import { shellClickHandler } from "./gameLogic";
 import { VirtualPositions } from "../types/types";
 
-// FIXME: Move this to its own component
 export function createChances(): HTMLSpanElement | null {
     const chancesContainer = document.createElement('div');
-    chancesContainer.id = ContainerIds.CHANCES;
+    chancesContainer.id = Ids.CHANCES;
 
     const chancesSpan = document.createElement('span');
     chancesSpan.id = 'chances';
     chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     chancesContainer.appendChild(chancesSpan);
 
-    const gameContainer = document.getElementById(ContainerIds.GAME);
+    const gameContainer = document.getElementById(Ids.GAME);
     gameContainer?.appendChild(chancesContainer);
 
     return chancesSpan;
 }
 
 export function createShells(chancesSpan: HTMLSpanElement | null): void {
-    const gameContainer = document.getElementById(ContainerIds.GAME);
-    let shellContainer = document.getElementById(ContainerIds.SHELL);
+    const gameContainer = document.getElementById(Ids.GAME);
+    let shellContainer = document.getElementById(Ids.SHELL);
 
     if (!shellContainer) {
         shellContainer = document.createElement('div');
     }
 
-    shellContainer.id = ContainerIds.SHELL;
+    shellContainer.id = Ids.SHELL;
 
     for (let i = 0; i < settingsStore.shellNumber; i++) {
         const shell = document.createElement('div');
@@ -63,7 +62,7 @@ const extractCurrentTranslateX = (element: HTMLElement): number => {
 
 export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     const virtualPositions: VirtualPositions = {};
-    const shellContainer = document.getElementById(ContainerIds.SHELL);
+    const shellContainer = document.getElementById(Ids.SHELL);
 
     if (!shellContainer) {
         return;
