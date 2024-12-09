@@ -68,5 +68,5 @@ export const maxValues: Partial<Record<keyof SettingsStore, string>> = {
 
 export const root = document.querySelector<HTMLDivElement>('#app');
 
-export const gameIrrelevantElementIds = [Ids.BTN_START_GAME, Ids.START_GAME_SANTA, Ids.POST_GAME_BTN, Ids.POST_GAME_MSG, Ids.POST_GAME_IMG];
+export const gameIrrelevantElementIds = [Ids.BTN_START_GAME, Ids.POST_GAME_BTN, Ids.POST_GAME_MSG, Ids.POST_GAME_IMG];
 export const gameIrrelevantClassNames = [Classes.POST_GAME];
