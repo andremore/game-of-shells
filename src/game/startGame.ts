@@ -1,9 +1,10 @@
 import { Chances } from "../components/Chances";
+import { Shells } from "../components/Shells";
 import { setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
-import { showBallInShellTemporarily } from "./gameLogic";
-import { createShells, shuffleShells } from "./gameUI";
+import { showBallInShellTemporarily, } from "./gameLogic";
+import { shuffleShells } from "./gameUI";
 
 // Responsible for starting the game loop when the user clicks either the start or the play again button
 export function startGame(): void {
@@ -20,7 +21,7 @@ export function startGame(): void {
         chancesSpan = Chances();
     }
 
-    createShells(chancesSpan);
+    Shells(chancesSpan);
     setBallIndex();
     setIsGameOngoing(true);
 
