@@ -70,6 +70,11 @@
   background-color: #f0f3fe;
 }
 
+.modal-content input:disabled {
+  background-color: #5959595c;
+  color: #dadce6;
+}
+
 .modal-content #modal-input-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

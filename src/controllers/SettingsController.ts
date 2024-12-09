@@ -12,12 +12,12 @@ export function SettingsController() {
     const {
         modalDialog,
         applyButton,
-        inputContainer,
+        form,
         cancelButton
     } = SettingsModal();
 
     function updateModalInputs() {
-        const inputs = inputContainer.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
+        const inputs = form.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
         inputs.forEach(input => {
             const key = input.name as keyof SettingsStore;
             if (settingsStore[key]) {
@@ -26,11 +26,15 @@ export function SettingsController() {
         });
     }
 
-    DifficultyContainer(updateModalInputs, settingsStore.difficulty);
+    DifficultyContainer(
+        updateModalInputs,
+        settingsStore.difficulty,
+        form
+    );
 
     modalDialog.showModal();
 
-    const submitHandler = handleSubmit(inputContainer, applyButton, modalDialog);
+    const submitHandler = handleSubmit(form, applyButton, modalDialog);
     applyButton.addEventListener('click', submitHandler);
     cancelButton.addEventListener('click', () => handleCancel(currentSettingsStoreVals, modalDialog));
 

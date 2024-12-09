@@ -1,4 +1,4 @@
-import { Ids, Difficulty, Mode, SettingsStoreKeys, Speed, Classes } from "../types/enums";
+import { Classes, Difficulty, Ids, SettingsStoreKeys, Speed } from "../types/enums";
 import { SettingsStore } from "../types/types";
 
 export const easySettings: SettingsStore = {
@@ -6,7 +6,6 @@ export const easySettings: SettingsStore = {
     shuffleNumber: 2,
     speed: Speed.SLOW,
     chances: 2,
-    mode: Mode.DEFAULT,
     displayBallTTl: 1500,
     difficulty: Difficulty.EASY
 }
@@ -16,7 +15,6 @@ export const normalSettings: SettingsStore = {
     shuffleNumber: 3,
     speed: Speed.NORMAL,
     chances: 1,
-    mode: Mode.DEFAULT,
     displayBallTTl: 1000,
     difficulty: Difficulty.NORMAL
 }
@@ -26,7 +24,6 @@ export const hardSettings: SettingsStore = {
     shuffleNumber: 3,
     speed: Speed.FAST,
     chances: 1,
-    mode: Mode.DEFAULT,
     displayBallTTl: 750,
     difficulty: Difficulty.HARD
 }

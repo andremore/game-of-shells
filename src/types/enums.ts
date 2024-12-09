@@ -27,11 +27,6 @@ export enum Speed {
     HARDCORE = 50
 }
 
-export enum Mode {
-    DEFAULT = 'default',
-    ROGUELIKE = 'roguelike'
-}
-
 export enum Ids {
     BTN_START_GAME = 'btn-start-game',
     START_GAME_SANTA = 'start-game-santa',
