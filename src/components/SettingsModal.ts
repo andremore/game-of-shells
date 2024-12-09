@@ -27,14 +27,14 @@ export function SettingsModal() {
     difficultyPresetsContainer.appendChild(difficultyPresetsTitle);
     modalContent.appendChild(difficultyPresetsContainer);
 
-    const inputContainer = document.createElement('form');
-    inputContainer.id = 'modal-input-container';
+    const form = document.createElement('form');
+    form.id = 'modal-input-container';
 
     Object.values(SettingsStoreKeys).forEach(key => {
-        inputContainer.appendChild(ModalInputNumber(key as SettingsStoreKeys));
+        form.appendChild(ModalInputNumber(key as SettingsStoreKeys));
     });
 
-    modalContent.appendChild(inputContainer);
+    modalContent.appendChild(form);
 
     const actionsContainer = document.createElement('div');
     actionsContainer.id = 'actions-container';
@@ -52,5 +52,5 @@ export function SettingsModal() {
     modalDialog.appendChild(modalContent);
     document.body.appendChild(modalDialog);
 
-    return { modalDialog, applyButton, inputContainer, cancelButton };
+    return { modalDialog, applyButton, form, cancelButton };
 }

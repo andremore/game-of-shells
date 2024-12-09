@@ -1,6 +1,7 @@
-import { setSettings } from "../stores/settingsStore";
-import { Difficulty, Mode } from "../types/enums";
+import { setSettings, settingsStore } from "../stores/settingsStore";
+import { Difficulty } from "../types/enums";
 import { SettingsStore } from "../types/types";
+import { settingsMap } from "./constants";
 
 export function handleSubmit(
     inputContainer: HTMLFormElement,
@@ -25,11 +26,13 @@ export function handleSubmit(
             formValues.difficulty = selectedDifficultyEl.textContent as string;
         }
 
-        // TODO: Remove when implemented
-        formValues.mode = Mode.DEFAULT;
+        let settingsToSubmit: Record<string, string> | SettingsStore = formValues;
 
-        // FIXME: Avoid using as unknown if possible
-        setSettings(formValues as unknown as SettingsStore);
+        if (Object.keys(formValues).length < Object.keys(settingsStore).length) {
+            settingsToSubmit = settingsMap[formValues.difficulty as Difficulty];
+        }
+
+        setSettings(settingsToSubmit as SettingsStore);
         closeModal(modalDialog, applyButton);
     };
 }

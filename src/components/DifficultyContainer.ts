@@ -3,7 +3,33 @@ import { Ids, Difficulty } from "../types/enums";
 import { settingsMap } from "../utils/constants";
 import { BtnDifficulty } from "./Button/BtnDifficulty";
 
-export function DifficultyContainer(updateModalInputs: () => void, currentDifficulty: Difficulty) {
+function updateSelectedDifficultyAndInputs(
+  newDifficultyElement: HTMLElement | null,
+  form: HTMLFormElement,
+  difficulty: Difficulty
+): void {
+  const previousSelectedDifficultyEl = document.querySelector('.selected-difficulty');
+
+  if (previousSelectedDifficultyEl != null) {
+    previousSelectedDifficultyEl.classList.remove('selected-difficulty');
+  }
+
+  if (newDifficultyElement != null) {
+    newDifficultyElement.classList.add('selected-difficulty');
+  }
+
+  const inputs = form.querySelectorAll('input') as unknown as HTMLInputElement[];
+
+  inputs.forEach((input: HTMLInputElement) => {
+    input.disabled = difficulty !== Difficulty.CUSTOM;
+  });
+}
+
+export function DifficultyContainer(
+  updateModalInputs: () => void,
+  currentDifficulty: Difficulty,
+  form: HTMLFormElement
+) {
   const difficultyContainer = document.createElement('div');
   difficultyContainer.id = Ids.DIFFICULTY;
   difficultyContainer.classList.add(`modal-${Ids.DIFFICULTY}`);
@@ -11,30 +37,15 @@ export function DifficultyContainer(updateModalInputs: () => void, currentDiffic
   Object.keys(settingsMap).forEach(difficulty => {
     const classNames = ['difficulty'];
 
-    // FIXME: Duplicated code
     if (currentDifficulty === difficulty) {
-      const previousSelectedDifficultyEl = document.querySelector('.selected-difficulty');
-
-      if (previousSelectedDifficultyEl != null) {
-        previousSelectedDifficultyEl.classList.remove('selected-difficulty');
-      }
-
+      updateSelectedDifficultyAndInputs(null, form, difficulty);
       classNames.push('selected-difficulty');
     }
 
     const btnDifficulty = BtnDifficulty({
       difficulty: difficulty as Difficulty,
       classNames,
-      onClick: () => {
-        // FIXME: Duplicated code
-        const previousSelectedDifficultyEl = document.querySelector('.selected-difficulty');
-
-        if (previousSelectedDifficultyEl != null) {
-          previousSelectedDifficultyEl.classList.remove('selected-difficulty');
-        }
-
-        btnDifficulty.classList.add('selected-difficulty');
-      }
+      onClick: () => updateSelectedDifficultyAndInputs(btnDifficulty, form, difficulty as Difficulty)
     });
 
     btnDifficulty.addEventListener('click', () => {

@@ -1,8 +1,9 @@
+import { DifficultyContainer } from "../components/DifficultyContainer";
+import { SettingsModal } from "../components/SettingsModal";
 import { settingsStore } from "../stores/settingsStore";
 import { SettingsStore } from "../types/types";
 import { handleCancel, handleSubmit } from "../utils/settingsFormHandlers";
-import { DifficultyContainer } from "../components/DifficultyContainer";
-import { SettingsModal } from "../components/SettingsModal";
+import { maxValues } from "../utils/constants";
 
 import '../styles/modal.css';
 
@@ -12,25 +13,48 @@ export function SettingsController() {
     const {
         modalDialog,
         applyButton,
-        inputContainer,
+        form,
         cancelButton
     } = SettingsModal();
 
     function updateModalInputs() {
-        const inputs = inputContainer.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
+        const inputs = form.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
         inputs.forEach(input => {
             const key = input.name as keyof SettingsStore;
+
             if (settingsStore[key]) {
                 input.value = settingsStore[key].toString();
             }
+
+            const maxValue = parseInt(maxValues[key] as string, 10);
+            input.max = maxValue.toString();
+
+            input.addEventListener('input', () => {
+                if (parseInt(input.value, 10) > maxValue) {
+                    input.value = maxValue.toString();
+                }
+            });
         });
     }
 
-    DifficultyContainer(updateModalInputs, settingsStore.difficulty);
+    DifficultyContainer(
+        updateModalInputs,
+        settingsStore.difficulty,
+        form
+    );
 
     modalDialog.showModal();
 
-    const submitHandler = handleSubmit(inputContainer, applyButton, modalDialog);
+    const escapeKeyListener = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && modalDialog.open) {
+            handleCancel(currentSettingsStoreVals, modalDialog);
+            document.removeEventListener('keydown', escapeKeyListener);
+        }
+    };
+
+    document.addEventListener('keydown', escapeKeyListener);
+
+    const submitHandler = handleSubmit(form, applyButton, modalDialog);
     applyButton.addEventListener('click', submitHandler);
     cancelButton.addEventListener('click', () => handleCancel(currentSettingsStoreVals, modalDialog));
 

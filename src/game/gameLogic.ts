@@ -58,6 +58,7 @@ export function showBallInShellTemporarily(): Promise<void> {
     ball.src = '/ball.svg';
     ball.id = 'ball';
 
+    console.log(gameStore);
     const shellToAddBall = gameStore.shells[gameStore.ballIndex].element;
 
     return new Promise<void>((resolve) => {
