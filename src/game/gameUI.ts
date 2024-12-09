@@ -5,6 +5,7 @@ import { guessHandler } from "./gameLogic";
 import { VirtualPositions } from "../types/types";
 
 import '../styles/game.css';
+import { extractCurrentTranslateX } from "../utils/extractCurrentTranslateX";
 
 export function createChances(): HTMLSpanElement | null {
     const chancesContainer = document.createElement('div');
@@ -50,17 +51,6 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
 
     gameContainer?.appendChild(shellContainer);
 }
-
-const extractCurrentTranslateX = (element: HTMLElement): number => {
-    const transform = window.getComputedStyle(element).transform;
-
-    if (transform === "none") {
-        return 0;
-    }
-
-    const matrix = new DOMMatrix(transform);
-    return matrix.m41;
-};
 
 export function shuffleShells(callbacksToRunAfterShuffle: () => void): void {
     const virtualPositions: VirtualPositions = {};
