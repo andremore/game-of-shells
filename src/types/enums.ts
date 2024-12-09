@@ -21,10 +21,9 @@ export enum Difficulty {
 }
 
 export enum Speed {
-    SLOW = 500,
-    NORMAL = 1000,
-    FAST = 150,
-    HARDCORE = 50
+    SLOW = 1000,
+    NORMAL = 500,
+    FAST = 350,
 }
 
 export enum Ids {
