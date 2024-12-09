@@ -36,10 +36,17 @@ export enum Mode {
 export enum Ids {
     BTN_START_GAME = 'btn-start-game',
     START_GAME_SANTA = 'start-game-santa',
+    POST_GAME_MSG = 'msg-post-game',
+    POST_GAME_BTN = 'btn-post-game',
+    POST_GAME_IMG = 'img-post-game',
     GAME = 'game-container',
     SHELL = 'shell-container',
     CHANCES = 'chances-container',
     DIFFICULTY = 'difficulty-container'
+}
+
+export enum Classes {
+    POST_GAME = '.post-game',
 }
 
 export enum ButtonType {

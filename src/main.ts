@@ -6,6 +6,7 @@ import { SettingsController } from './controllers/SettingsController';
 import { BtnRestart } from './components/Button/BtnRestart';
 import { gameStore } from './stores/gameStore';
 import { restartGame } from './game/gameLogic';
+import { Ids } from './types/enums';
 
 function main() {
   const header = document.createElement('header');
@@ -24,8 +25,9 @@ function main() {
 
     restartGame(true);
 
-    document.getElementById('post-game-msg')?.remove();
-    document.getElementById('post-game-btn')?.remove();
+    document.getElementById(Ids.POST_GAME_MSG)?.remove();
+    document.getElementById(Ids.POST_GAME_BTN)?.remove();
+    document.getElementById(Ids.POST_GAME_IMG)?.remove();
     btnRestart.disabled = true;
   });
 
@@ -44,7 +46,7 @@ function main() {
   logoTitleContainer.id = 'logo-title-container';
   logoTitleContainer.appendChild(logo);
   logoTitleContainer.appendChild(title);
-  
+
   header?.appendChild(logoTitleContainer);
   header?.appendChild(btnContainer);
   root?.appendChild(header);

@@ -127,9 +127,24 @@ main {
   align-items: center;
 }
 
-#btn-start-game {
+#btn-start-game, #btn-post-game {
   font-weight: bold;
   box-shadow: 0px 30px 25px -30px rgba(0, 0, 0, 1);
+}
+
+#btn-start-game:hover {
+  animation: jiggle 1s ease-in-out infinite;
+}
+
+#img-post-game {
+  width: 10em;
+  animation: jiggle 1s ease-in-out infinite;
+}
+
+#msg-post-game {
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 0.1em;
 }
 
 #start-game-santa {
