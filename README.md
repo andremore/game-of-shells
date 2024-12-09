@@ -1,9 +1,5 @@
 # Game of Santas 🎅
 
-**Game of Santas (Shells)** take at home task submission.
-
----
-
 ## Why Vanilla TypeScript?
 
 For this project, I intentionally avoided using any frontend frameworks to focus on core web development skills. By using Vanilla TypeScript, I aimed to:
