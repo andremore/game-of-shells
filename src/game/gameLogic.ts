@@ -4,8 +4,14 @@ import { gameStore, resetGameState } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { Ids } from "../types/enums";
 
-export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | null): void {
-    const isCorrectShell = index === gameStore.ballIndex;
+// Runs after the user tries to guess the shell and he doesn't have any chances left if any
+function endGame(userWon: boolean): void {
+    PostGame(userWon);
+    restartGame();
+}
+
+export function guessHandler(clickedIndex: number, chancesSpan: HTMLSpanElement | null): void {
+    const isCorrectShell = clickedIndex === gameStore.ballIndex;
 
     if (isCorrectShell) {
         endGame(isCorrectShell);
@@ -18,12 +24,13 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
         chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     }
 
-    const { element, handlerFn } = gameStore.shells[index];
+    const { element, handlerFn } = gameStore.shells[clickedIndex];
 
-    if (gameStore.chancesLeft <= 0) {
+    if (!gameStore.chancesLeft) {
         endGame(isCorrectShell);
         return;
     } else {
+        // Responsible to visually display previously wrongly guesses
         element.style.filter = 'grayscale(1)';
 
         const hat = element.children[0] as HTMLImageElement;
@@ -35,6 +42,7 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
     element.style.cursor = 'auto';
 }
 
+// Either runs when the user explictly chooses to restart or the game ends
 export function restartGame(addStartGameBtn = false) {
     document.getElementById(Ids.SHELL)?.remove();
     document.getElementById(Ids.CHANCES)?.remove();
@@ -49,11 +57,7 @@ export function restartGame(addStartGameBtn = false) {
     resetGameState();
 }
 
-export function endGame(userWon: boolean): void {
-    PostGame(userWon);
-    restartGame();
-}
-
+// Initial ball display based on display ball time to leave setting and chosen shell
 export function showBallInShellTemporarily(): Promise<void> {
     if (gameStore.ballIndex == null) {
         return Promise.resolve();

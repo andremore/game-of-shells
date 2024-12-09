@@ -1,7 +1,7 @@
 import { Ids } from "../types/enums";
 import { settingsStore } from "../stores/settingsStore";
 import { gameStore, setIsGameOngoing } from "../stores/gameStore";
-import { shellClickHandler } from "./gameLogic";
+import { guessHandler } from "./gameLogic";
 import { VirtualPositions } from "../types/types";
 
 import '../styles/game.css';
@@ -43,7 +43,7 @@ export function createShells(chancesSpan: HTMLSpanElement | null): void {
         shellContainer.appendChild(shell);
         gameStore.shells.push({
             element: shell,
-            listener: () => shellClickHandler(i, chancesSpan),
+            listener: () => guessHandler(i, chancesSpan),
             handlerFn: () => null
         });
     }
