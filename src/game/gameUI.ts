@@ -7,21 +7,6 @@ import { VirtualPositions } from "../types/types";
 import '../styles/game.css';
 import { extractCurrentTranslateX } from "../utils/extractCurrentTranslateX";
 
-export function createChances(): HTMLSpanElement | null {
-    const chancesContainer = document.createElement('div');
-    chancesContainer.id = Ids.CHANCES;
-
-    const chancesSpan = document.createElement('span');
-    chancesSpan.id = 'chances';
-    chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
-    chancesContainer.appendChild(chancesSpan);
-
-    const gameContainer = document.getElementById(Ids.GAME);
-    gameContainer?.appendChild(chancesContainer);
-
-    return chancesSpan;
-}
-
 export function createShells(chancesSpan: HTMLSpanElement | null): void {
     const gameContainer = document.getElementById(Ids.GAME);
     let shellContainer = document.getElementById(Ids.SHELL);

@@ -1,8 +1,9 @@
+import { Chances } from "../components/Chances";
 import { setBallIndex, setIsGameOngoing, setShellsClickHandlers } from "../stores/gameStore";
 import { settingsStore } from "../stores/settingsStore";
 import { destroyGameIrrelevantElements } from "./destroyGameIrrelevantElements";
 import { showBallInShellTemporarily } from "./gameLogic";
-import { createChances, createShells, shuffleShells } from "./gameUI";
+import { createShells, shuffleShells } from "./gameUI";
 
 // Responsible for starting the game loop when the user clicks either the start or the play again button
 export function startGame(): void {
@@ -16,7 +17,7 @@ export function startGame(): void {
 
     let chancesSpan: HTMLSpanElement | null = null;
     if (settingsStore.chances > 1) {
-        chancesSpan = createChances();
+        chancesSpan = Chances();
     }
 
     createShells(chancesSpan);
