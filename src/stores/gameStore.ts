@@ -25,6 +25,7 @@ export function setBallIndex() {
     setGameStore(GameStoreKeys.BALL_INDEX, Math.floor(Math.random() * gameStore.shells.length));
 }
 
+// We save the shell click handlers in state to keep their reference
 export function setShellsClickHandlers(chancesSpan: HTMLSpanElement | null) {
     if (!gameStore.shells.length) {
         return;
