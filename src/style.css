@@ -74,15 +74,15 @@ header {
 }
 
 #logo-title-container {
- display: flex;
- gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
-#logo-title-container > img {
+#logo-title-container>img {
   height: 5em;
 }
 
-#logo-title-container > h1 {
+#logo-title-container>h1 {
   margin: 0;
   color: #f0f3fe;
 }
@@ -127,7 +127,8 @@ main {
   align-items: center;
 }
 
-#btn-start-game, #btn-post-game {
+#btn-start-game,
+#btn-post-game {
   font-weight: bold;
   box-shadow: 0px 30px 25px -30px rgba(0, 0, 0, 1);
 }
@@ -229,6 +230,8 @@ main {
   width: 50dvw;
   padding: 2em;
   border-radius: 1em;
+  background-color: #1c1c1c;
+  color: #efefef;
   border-color: transparent;
   text-align: center;
   z-index: 9999;
@@ -252,20 +255,37 @@ main {
 .modal-content .modal-difficulty-container>button {
   font-size: 1.2rem;
   background-color: transparent;
-  font-weight: normal;
+  font-weight: bold;
   text-transform: capitalize;
+  margin-bottom: 1em;
+  color: #f0f3fe;
+  width: 100%;
+}
+
+.modal-content .modal-difficulty-container>button:hover {
+  color: #1c1c1c;
+  background-color: #f0f3fe;
+  transition: all 250ms;
 }
 
 .selected-difficulty {
-  background-color: #1a1a1a !important;
+  background-color: #595959 !important;
+  color: #1c1c1c;
+}
+
+.selected-difficulty:hover {
+  color: #f0f3fe !important;
 }
 
 .modal-content input {
   width: 100%;
-  padding: 1em;
-  margin: 1em 0;
+  padding: 0.7em 1em;
+  margin: 0.2em 0;
   box-sizing: border-box;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  border-radius: 0.6em;
+  border: none;
+  background-color: #f0f3fe;
 }
 
 .modal-content #modal-input-container {
@@ -276,10 +296,22 @@ main {
 
 .modal-content #actions-container {
   display: flex;
-  gap: 5%;
+  gap: 2em;
+  margin-top: 1em;
 }
 
-.modal-content button {
+#actions-container > button {
   width: 100%;
   font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.7em;
+
+}
+#actions-container > button:nth-of-type(2) {
+  background-color: #4554bd;
+}
+
+#actions-container > button:nth-of-type(2):hover {
+  background-color: #1f3aff;
+  transition: all 250ms;
 }

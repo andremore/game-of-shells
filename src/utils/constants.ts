@@ -31,21 +31,11 @@ export const hardSettings: SettingsStore = {
     difficulty: Difficulty.HARD
 }
 
-export const hardcoreSettings: SettingsStore = {
-    shellNumber: 6,
-    shuffleNumber: 5,
-    speed: Speed.HARDCORE,
-    chances: 1,
-    mode: Mode.DEFAULT,
-    displayBallTTl: 250,
-    difficulty: Difficulty.HARDCORE
-}
-
 export const settingsMap = {
     [Difficulty.EASY]: easySettings,
     [Difficulty.NORMAL]: normalSettings,
     [Difficulty.HARD]: hardSettings,
-    [Difficulty.HARDCORE]: hardcoreSettings
+    [Difficulty.CUSTOM]: normalSettings,
 }
 
 export const settingsInputsMap = {
@@ -54,7 +44,7 @@ export const settingsInputsMap = {
         key: 'chances'
     },
     [SettingsStoreKeys.SHELL_NUMBER]: {
-        label: 'Shells:',
+        label: 'Santas:',
         key: 'shellNumber'
     },
     [SettingsStoreKeys.SHUFFLE_NUMBER]: {
