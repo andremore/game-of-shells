@@ -3,6 +3,11 @@ import { Difficulty } from "../types/enums";
 import { SettingsStore } from "../types/types";
 import { settingsMap } from "./constants";
 
+// Helper function to determine if a preset is selected
+function isPresetSelected(formValues: Record<string, string>, settingsStore: SettingsStore): boolean {
+    return Object.keys(formValues).length < Object.keys(settingsStore).length;
+}
+
 export function handleSubmit(
     inputContainer: HTMLFormElement,
     applyButton: HTMLButtonElement,
@@ -28,7 +33,8 @@ export function handleSubmit(
 
         let settingsToSubmit: Record<string, string> | SettingsStore = formValues;
 
-        if (Object.keys(formValues).length < Object.keys(settingsStore).length) {
+        if (isPresetSelected(formValues, settingsStore)) {
+            // In case the user chose a preset we get that preset from the map
             settingsToSubmit = settingsMap[formValues.difficulty as Difficulty];
         }
 
@@ -37,6 +43,7 @@ export function handleSubmit(
     };
 }
 
+// Restores previous settings
 export function handleCancel(
     currentSettingsStoreVals: SettingsStore,
     modalDialog: HTMLDialogElement
