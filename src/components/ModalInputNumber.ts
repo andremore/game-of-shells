@@ -3,8 +3,10 @@ import { SettingsStoreKeys } from "../types/enums";
 import { SettingsStore } from "../types/types";
 import { settingsInputsMap } from "../utils/constants";
 
+// Reusable component for modal inputs
 export function ModalInputNumber(settingsKey: SettingsStoreKeys) {
     const { label, key } = settingsInputsMap[settingsKey];
+
     const labelEl = document.createElement('label');
     labelEl.textContent = label;
 
