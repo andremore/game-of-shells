@@ -1,12 +1,14 @@
 import { BtnSettings } from './components/Button/BtnSettings';
 import { GameContainer } from './components/GameContainer';
 import { root } from './utils/constants';
-import './style.css';
 import { SettingsController } from './controllers/SettingsController';
 import { BtnRestart } from './components/Button/BtnRestart';
 import { gameStore } from './stores/gameStore';
 import { restartGame } from './game/gameLogic';
 import { Ids } from './types/enums';
+
+import './main.css';
+import './styles/header.css';
 
 function main() {
   const header = document.createElement('header');

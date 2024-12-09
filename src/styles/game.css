@@ -1,0 +1,94 @@
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#btn-start-game,
+#btn-post-game {
+  font-weight: bold;
+  box-shadow: 0px 30px 25px -30px rgba(0, 0, 0, 1);
+}
+
+#btn-start-game:hover {
+  animation: jiggle 1s ease-in-out infinite;
+}
+
+#img-post-game {
+  width: 10em;
+  animation: jiggle 1s ease-in-out infinite;
+}
+
+#msg-post-game {
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 0.1em;
+}
+
+#start-game-santa {
+  position: absolute;
+  top: 22.5em;
+  width: 12em;
+}
+
+#shell-container {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10em;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.hat {
+  position: absolute;
+  width: 10em;
+  z-index: 3;
+}
+
+.hat[data-jiggle='true']:hover {
+  animation: jiggle 0.5s ease-in-out infinite;
+}
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+#ball {
+  position: absolute;
+  top: 80%;
+  left: -10%;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+}
+
+#chances-container {
+  text-align: right;
+}

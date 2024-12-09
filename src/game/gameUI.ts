@@ -4,6 +4,8 @@ import { gameStore, setIsGameOngoing } from "../stores/gameStore";
 import { shellClickHandler } from "./gameLogic";
 import { VirtualPositions } from "../types/types";
 
+import '../styles/game.css';
+
 export function createChances(): HTMLSpanElement | null {
     const chancesContainer = document.createElement('div');
     chancesContainer.id = Ids.CHANCES;

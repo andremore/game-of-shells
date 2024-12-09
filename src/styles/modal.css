@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 9998;
+}
+
+.modal {
+  width: 50dvw;
+  padding: 2em;
+  border-radius: 1em;
+  background-color: #1c1c1c;
+  color: #efefef;
+  border-color: transparent;
+  text-align: center;
+  z-index: 9999;
+}
+
+.modal-content h2 {
+  margin-bottom: 2em;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.modal-content .modal-difficulty-container {
+  display: flex;
+  gap: 1em;
+}
+
+.modal-content .modal-difficulty-container>button {
+  font-size: 1.2rem;
+  background-color: transparent;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 1em;
+  color: #f0f3fe;
+  width: 100%;
+}
+
+.modal-content .modal-difficulty-container>button:hover {
+  color: #1c1c1c;
+  background-color: #f0f3fe;
+  transition: all 250ms;
+}
+
+.selected-difficulty {
+  background-color: #595959 !important;
+  color: #1c1c1c;
+}
+
+.selected-difficulty:hover {
+  color: #f0f3fe !important;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.7em 1em;
+  margin: 0.2em 0;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  border-radius: 0.6em;
+  border: none;
+  background-color: #f0f3fe;
+}
+
+.modal-content #modal-input-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2em;
+}
+
+.modal-content #actions-container {
+  display: flex;
+  gap: 2em;
+  margin-top: 1em;
+}
+
+#actions-container > button {
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.7em;
+
+}
+#actions-container > button:nth-of-type(2) {
+  background-color: #4554bd;
+}
+
+#actions-container > button:nth-of-type(2):hover {
+  background-color: #1f3aff;
+  transition: all 250ms;
+}

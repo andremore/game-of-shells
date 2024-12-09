@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  z-index: 1;
+  margin: 2em;
+  border-radius: 1em;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 50px 22px -35px rgba(0, 0, 0, 0.1);
+}
+
+#logo-title-container {
+  display: flex;
+  gap: 2em;
+}
+
+#logo-title-container>img {
+  height: 5em;
+}
+
+#logo-title-container>h1 {
+  margin: 0;
+  color: #f0f3fe;
+}
+
+#btn-container {
+  display: flex;
+  gap: 2em;
+}
