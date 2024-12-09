@@ -1,8 +1,9 @@
+import { DifficultyContainer } from "../components/DifficultyContainer";
+import { SettingsModal } from "../components/SettingsModal";
 import { settingsStore } from "../stores/settingsStore";
 import { SettingsStore } from "../types/types";
 import { handleCancel, handleSubmit } from "../utils/settingsFormHandlers";
-import { DifficultyContainer } from "../components/DifficultyContainer";
-import { SettingsModal } from "../components/SettingsModal";
+import { maxValues } from "../utils/constants";
 
 import '../styles/modal.css';
 
@@ -20,9 +21,19 @@ export function SettingsController() {
         const inputs = form.querySelectorAll('input[type="number"]') as unknown as HTMLInputElement[];
         inputs.forEach(input => {
             const key = input.name as keyof SettingsStore;
+
             if (settingsStore[key]) {
                 input.value = settingsStore[key].toString();
             }
+
+            const maxValue = parseInt(maxValues[key] as string, 10);
+            input.max = maxValue.toString();
+
+            input.addEventListener('input', () => {
+                if (parseInt(input.value, 10) > maxValue) {
+                    input.value = maxValue.toString();
+                }
+            });
         });
     }
 
