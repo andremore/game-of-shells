@@ -34,6 +34,15 @@ export function SettingsController() {
 
     modalDialog.showModal();
 
+    const escapeKeyListener = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && modalDialog.open) {
+            handleCancel(currentSettingsStoreVals, modalDialog);
+            document.removeEventListener('keydown', escapeKeyListener);
+        }
+    };
+
+    document.addEventListener('keydown', escapeKeyListener);
+
     const submitHandler = handleSubmit(form, applyButton, modalDialog);
     applyButton.addEventListener('click', submitHandler);
     cancelButton.addEventListener('click', () => handleCancel(currentSettingsStoreVals, modalDialog));
