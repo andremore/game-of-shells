@@ -3,6 +3,7 @@ import { Ids, Difficulty } from "../types/enums";
 import { settingsMap } from "../utils/constants";
 import { BtnDifficulty } from "./Button/BtnDifficulty";
 
+// Adds the selected difficulty class accordingly and if it isn't a custom difficulty it disables all inputs
 function updateSelectedDifficultyAndInputs(
   newDifficultyElement: HTMLElement | null,
   form: HTMLFormElement,
@@ -25,6 +26,7 @@ function updateSelectedDifficultyAndInputs(
   });
 }
 
+// Renders all difficulty presets, updates the state changes accordingly and updates the modal inputs
 export function DifficultyContainer(
   updateModalInputs: () => void,
   currentDifficulty: Difficulty,
