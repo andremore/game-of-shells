@@ -18,12 +18,17 @@ export function shellClickHandler(index: number, chancesSpan: HTMLSpanElement | 
         chancesSpan.textContent = `${gameStore.chancesLeft} chances left`;
     }
 
+    const { element, handlerFn } = gameStore.shells[index];
+
     if (gameStore.chancesLeft <= 0) {
         endGame(isCorrectShell);
         return;
-    }
+    } else {
+        element.style.filter = 'grayscale(1)';
 
-    const { element, handlerFn } = gameStore.shells[index];
+        const hat = element.children[0] as HTMLImageElement;
+        hat.dataset.jiggle = 'false';
+    }
 
     element.style.backgroundColor = 'red';
     element.removeEventListener('click', handlerFn);
@@ -58,7 +63,6 @@ export function showBallInShellTemporarily(): Promise<void> {
     ball.src = '/ball.svg';
     ball.id = 'ball';
 
-    console.log(gameStore);
     const shellToAddBall = gameStore.shells[gameStore.ballIndex].element;
 
     return new Promise<void>((resolve) => {
